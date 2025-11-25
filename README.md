@@ -59,17 +59,29 @@ The goal is to keep everything simple, modern, and easy to navigate.
 ```
 RentSmart/
 ├── index.html
-├── css/
-│   └── styles.css
-├── js/
-│   └── main.js
-├── php/
-│   ├── db.php
-│   ├── add_property.php
-│   ├── view_properties.php
-│   └── ...
-└── sql/
-    └── rentsmart.sql
+├── listing1.html
+├── listing2.html
+├── listing3.html
+├── listing4.html
+│
+├── assets/
+│ ├── css/
+│ │ └── style.css
+│ └── js/
+│ └── script.js
+│
+├── media/
+│ ├── images/
+│ │ └── ...
+│ └── icons/
+│ └── ...
+│
+├── docs/
+│ ├── project_proposal.doc
+│ └── project_synopsis.doc
+│
+├── .gitignore
+└── README.md
 ```
 
 ---
