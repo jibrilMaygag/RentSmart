@@ -96,6 +96,19 @@ RentSmart/
 
 ```
 http://localhost/RentSmart/
+
+### Compiling SCSS (optional)
+
+If you want to work on the SCSS source (`sass/style.scss`) and automatically compile it to `assets/css/style.css`:
+
+- Install dev dependencies: `npm install` (this will install `sass` from `package.json`).
+- Watch for changes and auto-build CSS: `npm run watch:css` 🔁
+- Build once: `npm run build:css` ✅
+
+Alternatively, without installing dependencies you can run:
+
+`npx sass --watch sass/style.scss:assets/css/style.css`
+
 ```
 
 ---
