@@ -7,8 +7,8 @@
   --shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
   --primary: #2563eb;
   --primary-darker: #1e40af;
-  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial;
+  --border-radius: 1.5rem;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 * {
@@ -29,24 +29,32 @@ body {
   margin: 2rem;
 }
 
+.btn {
+  border: none;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius);
+  color: white;
+}
+
+.btn--primary {
+  background-color: var(--primary);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
 }
-
 .header__nav {
   display: flex;
   align-items: center;
   gap: 2rem;
 }
-
 .header__list {
   display: flex;
   gap: 2rem;
   font-size: 1.7rem;
   list-style: none;
 }
-
 .header__item a,
 .header__item a:active {
   text-decoration: none;
@@ -54,27 +62,57 @@ body {
   font-family: inherit;
   transition: opacity 0.2s ease;
 }
-
 .header__item a:hover {
   opacity: 0.8;
 }
-
 .header .logo {
   font-weight: 600;
 }
-
 .header .login {
-  padding: 1rem 1.5rem;
-  border-radius: 1.5rem;
-  background-color: var(--primary);
-  color: #fff;
-  border: none;
-  font-family: inherit;
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-
 .header .login:hover {
   background-color: var(--primary-darker);
   box-shadow: 0 1rem 2rem rgba(37, 99, 235, 0.25);
   transform: translateY(-2px);
+}
+
+.hero {
+  height: 40vh;
+  width: 100%;
+  max-width: 60rem;
+  text-align: center;
+  margin: 0 auto;
+}
+.hero__search-container {
+  position: relative;
+  margin-top: 5rem;
+}
+.hero__heading {
+  font-size: 4rem;
+  margin-bottom: 4rem;
+}
+.hero__input {
+  width: 100%;
+  padding: 1rem 3rem 1rem 1rem;
+  border-radius: var(--border-radius);
+  outline: none;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+.hero__input[type=text]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+.hero__search {
+  position: absolute;
+  top: 60%;
+  right: 0.1rem;
+  transform: translateY(53%);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.hero__search:hover {
+  background: var(--primary-darker);
+  transform: translateY(55%) scale(1.05);
 }
