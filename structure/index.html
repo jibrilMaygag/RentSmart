@@ -1,44 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>RentSmart — Find your next stay</title>
-    <meta
-      name="description"
-      content="RentSmart — simple responsive listing UI inspired by modern short-term rental sites."
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RentSmart</title>
+
+    <!-- Inter Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/style.css" />
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <header class="header">
-      <div class="logo">RentSmart</div>
-      <nav class="header__nav">
-        <ul class="header__list">
-          <li class="header__item"><a href="#">Home</a></li>
-          <li class="header__item"><a href="#">Listings</a></li>
-          <li class="header__item"><a href="#">About</a></li>
-          <li class="header__item"><a href="#">Contact</a></li>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="container nav-wrapper">
+        <div class="logo">
+          <h2>RentSmart</h2>
+          <span class="logo-subtitle">Find your home</span>
+        </div>
+
+        <ul class="nav-menu">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Rent</a></li>
+          <li><a href="#">Buy</a></li>
+          <li><a href="#">Locations</a></li>
+          <li><a href="#">Contact</a></li>
         </ul>
-        <button class="login">Log in</button>
-      </nav>
-    </header>
-    <main>
-      <section class="hero">
-        <div class="hero__search-container">
-          <h1 class="hero__heading">Find your perfect home</h1>
-          <form action="">
-            <input
-              class="hero__input"
-              type="text"
-              name="address"
-              id="address"
-              placeholder="Search by City,Neighborhood, or Address"
-            />
-            <button class="btn btn--primary hero__search">Search</button>
+
+        <div class="nav-buttons">
+          <a href="#" class="btn-secondary">Login</a>
+          <a href="#" class="btn-primary">Sign Up</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <h1>Find Your Perfect Home</h1>
+        <p>Rent or buy beautiful homes in prime locations</p>
+
+        <div class="search-box">
+          <div class="search-tabs">
+            <button class="search-tab active">Rent</button>
+            <button class="search-tab">Buy</button>
+          </div>
+
+          <form class="search-form">
+            <div class="search-input">
+              <label>Location</label>
+              <input type="text" placeholder="City or area" />
+            </div>
+
+            <div class="search-input">
+              <label>Property Type</label>
+              <select>
+                <option>Apartment</option>
+                <option>House</option>
+                <option>Villa</option>
+              </select>
+            </div>
+
+            <div class="search-input">
+              <label>Price Range</label>
+              <select>
+                <option>5000birr - 10000birr</option>
+                <option>10000birr - 20000birr</option>
+                <option>30000birr</option>
+              </select>
+            </div>
+
+            <button class="btn-search">Search</button>
           </form>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+
+    <!-- FEATURED PROPERTIES -->
+    <section class="featured-properties">
+      <div class="container">
+        <div class="section-header">
+          <h2>Featured Properties</h2>
+          <p>Handpicked homes just for you</p>
+        </div>
+
+        <div class="properties-grid">
+          <!-- PROPERTY CARD 1 -->
+          <div class="property-card">
+            <div class="property-image">
+              <img
+                src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
+                alt=""
+              />
+              <span class="property-badge new">New</span>
+              <button class="wishlist-btn">♥</button>
+            </div>
+
+            <div class="property-content">
+              <div class="property-price">
+                <span class="price">30,200birr</span>
+                <span class="period">/ month</span>
+              </div>
+
+              <h3 class="property-title">Modern Apartment</h3>
+              <p class="property-location">Addis Ababa, Bole</p>
+
+              <div class="property-features">
+                <span>2 Beds</span>
+                <span>2 Baths</span>
+                <span>120 m²</span>
+              </div>
+
+              <div class="property-tags">
+                <span class="tag">Balcony</span>
+                <span class="tag">Parking</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROPERTY CARD 2 -->
+          <div class="property-card">
+            <div class="property-image">
+              <img
+                src="https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg"
+                alt=""
+              />
+              <span class="property-badge premium">Premium</span>
+              <button class="wishlist-btn">♥</button>
+            </div>
+
+            <div class="property-content">
+              <div class="property-price">
+                <span class="price">20,400birr</span>
+                <span class="period">/ month</span>
+              </div>
+
+              <h3 class="property-title">Luxury Villa</h3>
+              <p class="property-location">Addis Ababa, Ayat</p>
+
+              <div class="property-features">
+                <span>4 Beds</span>
+                <span>3 Baths</span>
+                <span>280 m²</span>
+              </div>
+
+              <div class="property-tags">
+                <span class="tag">Garden</span>
+                <span class="tag">Security</span>
+                <span class="tag">Garage</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROPERTY CARD 3 -->
+          <div class="property-card">
+            <div class="property-image">
+              <img
+                src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"
+                alt=""
+              />
+              <span class="property-badge">For Rent</span>
+              <button class="wishlist-btn">♥</button>
+            </div>
+
+            <div class="property-content">
+              <div class="property-price">
+                <span class="price">30,000birr</span>
+                <span class="period">/ month</span>
+              </div>
+
+              <h3 class="property-title">Cozy Studio</h3>
+              <p class="property-location">Addis Ababa, Kazanchis</p>
+
+              <div class="property-features">
+                <span>1 Bed</span>
+                <span>1 Bath</span>
+                <span>60 m²</span>
+              </div>
+
+              <div class="property-tags">
+                <span class="tag">Furnished</span>
+                <span class="tag">Wi-Fi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PROPERTY CARD 4 -->
+          <div class="property-card">
+            <div class="property-image">
+              <img
+                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
+                alt=""
+              />
+              <span class="property-badge new">New</span>
+              <button class="wishlist-btn">♥</button>
+            </div>
+
+            <div class="property-content">
+              <div class="property-price">
+                <span class="price">20,600birr</span>
+                <span class="period">/ month</span>
+              </div>
+
+              <h3 class="property-title">Family Home</h3>
+              <p class="property-location">Addis Ababa, Sar Bet</p>
+
+              <div class="property-features">
+                <span>3 Beds</span>
+                <span>2 Baths</span>
+                <span>180 m²</span>
+              </div>
+
+              <div class="property-tags">
+                <span class="tag">Backyard</span>
+                <span class="tag">Parking</span>
+                <span class="tag">Pet Friendly</span>
+              </div>
+            </div>
+          </div>
+          <!-- PROPERTY CARD 5 -->
+          <div class="property-card">
+            <div class="property-image">
+              <img
+                src="https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg"
+                alt="Family House"
+              />
+              <span class="property-badge premium">Premium</span>
+              <button class="wishlist-btn" type="button">♥</button>
+            </div>
+
+            <div class="property-content">
+              <div class="property-price">
+                <span class="price">22,000 birr</span>
+                <span class="period">/ month</span>
+              </div>
+
+              <h3 class="property-title">Spacious Family House</h3>
+              <p class="property-location">Addis Ababa, Sar Bet</p>
+
+              <div class="property-features">
+                <span>3 Beds</span>
+                <span>2 Baths</span>
+                <span>180 m²</span>
+              </div>
+
+              <div class="property-tags">
+                <span class="tag">Backyard</span>
+                <span class="tag">Parking</span>
+                <span class="tag">Security</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-more">
+          <a href="#" class="btn-outline large">View More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <h2>How It Works</h2>
+          <p>Simple steps to get your dream home</p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-icon">
+              <span class="icon-number">1</span>
+            </div>
+            <h3>Search</h3>
+            <p>Browse homes by location, price, and type.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <span class="icon-number">2</span>
+            </div>
+            <h3>Visit</h3>
+            <p>Schedule visits and explore properties.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-icon">
+              <span class="icon-number">3</span>
+            </div>
+            <h3>Move In</h3>
+            <p>Finalize the deal and enjoy your new home.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container cta-content">
+        <h2>Ready to Find Your Home?</h2>
+        <p>Join thousands of happy renters and buyers today</p>
+
+        <div class="cta-buttons">
+          <a href="#" class="btn-primary large">Get Started</a>
+          <a href="#" class="btn-outline large">Contact Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>RentSmart</h3>
+            <p>Your trusted platform for renting and buying homes.</p>
+          </div>
+
+          <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Rent</a></li>
+              <li><a href="#">Buy</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+              <a href="#">Facebook</a>
+              <a href="#">Twitter</a>
+              <a href="#">Instagram</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 RentSmart. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
