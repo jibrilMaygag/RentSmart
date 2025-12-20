@@ -4,16 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RentSmart</title>
-
-    <!-- Inter Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Your CSS -->
     <link rel="stylesheet" href="../assets/css/style.css" />
   </head>
+
   <body>
     <!-- NAVBAR -->
     <nav class="navbar">
@@ -40,8 +37,6 @@
 
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-overlay"></div>
-
       <div class="container hero-content">
         <h1>Find Your Perfect Home</h1>
         <p>Rent or buy beautiful homes in prime locations</p>
@@ -55,7 +50,18 @@
           <form class="search-form">
             <div class="search-input">
               <label>Location</label>
-              <input type="text" placeholder="City or area" />
+              <input type="text" list="cities" placeholder="City or area" />
+              <datalist id="cities">
+                <option value="Addis Ababa"></option>
+                <option value="Dire Dawa"></option>
+                <option value="Bahir Dar"></option>
+                <option value="Hawassa"></option>
+                <option value="Adama"></option>
+                <option value="Gondar"></option>
+                <option value="Mekelle"></option>
+                <option value="Jimma"></option>
+                <option value="Bishoftu"></option>
+              </datalist>
             </div>
 
             <div class="search-input">
@@ -82,6 +88,28 @@
       </div>
     </section>
 
+    <!-- STATS SECTION -->
+    <section class="stats-section">
+      <div class="container stats-grid">
+        <div class="stat-item">
+          <span class="stat-number">10k+</span>
+          <span class="stat-label">Properties Listed</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">5k+</span>
+          <span class="stat-label">Happy Clients</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100+</span>
+          <span class="stat-label">Cities Covered</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">4.9</span>
+          <span class="stat-label">Average Rating</span>
+        </div>
+      </div>
+    </section>
+
     <!-- FEATURED PROPERTIES -->
     <section class="featured-properties">
       <div class="container">
@@ -95,11 +123,14 @@
           <div class="property-card">
             <div class="property-image">
               <img
-                src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg"
-                alt=""
+                src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Modern Apartment"
+                loading="lazy"
               />
               <span class="property-badge new">New</span>
-              <button class="wishlist-btn">♥</button>
+              <button class="wishlist-btn" aria-label="Add to wishlist">
+                ♥
+              </button>
             </div>
 
             <div class="property-content">
@@ -128,11 +159,14 @@
           <div class="property-card">
             <div class="property-image">
               <img
-                src="https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg"
-                alt=""
+                src="https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Luxury Villa"
+                loading="lazy"
               />
               <span class="property-badge premium">Premium</span>
-              <button class="wishlist-btn">♥</button>
+              <button class="wishlist-btn" aria-label="Add to wishlist">
+                ♥
+              </button>
             </div>
 
             <div class="property-content">
@@ -162,11 +196,14 @@
           <div class="property-card">
             <div class="property-image">
               <img
-                src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg"
-                alt=""
+                src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Cozy Studio"
+                loading="lazy"
               />
               <span class="property-badge">For Rent</span>
-              <button class="wishlist-btn">♥</button>
+              <button class="wishlist-btn" aria-label="Add to wishlist">
+                ♥
+              </button>
             </div>
 
             <div class="property-content">
@@ -195,11 +232,14 @@
           <div class="property-card">
             <div class="property-image">
               <img
-                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg"
-                alt=""
+                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Family Home"
+                loading="lazy"
               />
               <span class="property-badge new">New</span>
-              <button class="wishlist-btn">♥</button>
+              <button class="wishlist-btn" aria-label="Add to wishlist">
+                ♥
+              </button>
             </div>
 
             <div class="property-content">
@@ -228,11 +268,18 @@
           <div class="property-card">
             <div class="property-image">
               <img
-                src="https://images.pexels.com/photos/164558/pexels-photo-164558.jpeg"
+                src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Family House"
+                loading="lazy"
               />
               <span class="property-badge premium">Premium</span>
-              <button class="wishlist-btn" type="button">♥</button>
+              <button
+                class="wishlist-btn"
+                type="button"
+                aria-label="Add to wishlist"
+              >
+                ♥
+              </button>
             </div>
 
             <div class="property-content">
@@ -261,6 +308,66 @@
 
         <div class="view-more">
           <a href="#" class="btn-outline large">View More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR LOCATIONS -->
+    <section class="popular-locations">
+      <div class="container">
+        <div class="section-header">
+          <h2>Popular Locations</h2>
+          <p>Find your next home in these top cities</p>
+        </div>
+
+        <div class="locations-grid">
+          <div class="location-card">
+            <img
+              src="https://images.pexels.com/photos/358488/pexels-photo-358488.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Addis Ababa"
+              loading="lazy"
+            />
+            <div class="location-overlay">
+              <h3>Addis Ababa</h3>
+              <p>250+ Properties</p>
+            </div>
+          </div>
+
+          <div class="location-card">
+            <img
+              src="https://images.pexels.com/photos/2166553/pexels-photo-2166553.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Hawassa"
+              loading="lazy"
+            />
+            <div class="location-overlay">
+              <h3>Hawassa</h3>
+              <p>120+ Properties</p>
+            </div>
+          </div>
+
+          <div class="location-card">
+            <img
+              src="https://images.pexels.com/photos/3225529/pexels-photo-3225529.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Dire Dawa"
+              loading="lazy"
+            />
+            <div class="location-overlay">
+              <h3>Dire Dawa</h3>
+              <p>85+ Properties</p>
+            </div>
+          </div>
+
+          <div class="location-card">
+            <img
+              src="https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="Bahir Dar"
+              loading="lazy"
+            />
+            <div class="location-overlay">
+              <h3>Bahir Dar</h3>
+              <p>90+ Properties</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -298,6 +405,92 @@
             <p>Finalize the deal and enjoy your new home.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>What Our Clients Say</h2>
+          <p>Real stories from happy homeowners and tenants</p>
+        </div>
+
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>
+                "RentSmart made finding my first apartment so easy. The filters
+                helped me find exactly what I wanted within my budget."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img
+                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200"
+                alt="Client"
+              />
+              <div class="author-info">
+                <h4>Abebe Kebede</h4>
+                <span>Tenant</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>
+                "Professional service and great listings. I sold my property in
+                just 2 weeks thanks to the exposure on this platform."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img
+                src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=200"
+                alt="Client"
+              />
+              <div class="author-info">
+                <h4>Sara Tesfaye</h4>
+                <span>Property Owner</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <p>
+                "The virtual tour feature saved me so much time. I knew it was
+                the right house before I even visited in person."
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <img
+                src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200"
+                alt="Client"
+              />
+              <div class="author-info">
+                <h4>Yared Alemu</h4>
+                <span>Home Buyer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER SECTION -->
+    <section class="newsletter-section">
+      <div class="container newsletter-content">
+        <div class="newsletter-text">
+          <h2>Stay Updated</h2>
+          <p>
+            Subscribe to our newsletter for the latest property listings and
+            market news.
+          </p>
+        </div>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Enter your email address" required />
+          <button type="submit" class="btn-primary">Subscribe</button>
+        </form>
       </div>
     </section>
 
