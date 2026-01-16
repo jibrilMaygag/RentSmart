@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
 
 // ==========================================
 // VARIABLES & DESIGN SYSTEM
@@ -27,10 +27,18 @@ $container-padding: 2rem;
 $section-spacing: 6rem;
 
 // Shadows & Effects
-$shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-sm:
+  0 1px 3px rgba(0, 0, 0, 0.12),
+  0 1px 2px rgba(0, 0, 0, 0.24);
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg:
+  0 10px 15px -3px rgba(0, 0, 0, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl:
+  0 20px 25px -5px rgba(0, 0, 0, 0.1),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
 $glass-blur: blur(12px);
 
 // Transitions
@@ -46,7 +54,7 @@ $transition-base: all 0.3s ease;
 }
 
 body {
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   background-color: $bg-body;
   color: $text-main;
   line-height: 1.6;
@@ -114,7 +122,7 @@ p {
     display: inline-block;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: -10px;
       left: 50%;
@@ -256,7 +264,7 @@ select {
       position: relative;
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         bottom: -4px;
         left: 0;
@@ -323,7 +331,10 @@ select {
 .hero {
   height: 100vh;
   min-height: 700px;
-  background: linear-gradient(135deg, rgba($primary-dark, 0.4), rgba($primary-dark, 0.2)), url('https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center/cover;
+  background:
+    linear-gradient(135deg, rgba($primary-dark, 0.4), rgba($primary-dark, 0.2)),
+    url("../../media/img/pexels-photo-259962.jpeg") no-repeat center
+      center/cover;
   // Updated background to a more impressive luxury house
   display: flex;
   align-items: center;
@@ -841,13 +852,17 @@ select {
     overflow: hidden;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       right: 0;
       width: 300px;
       height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05));
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05)
+      );
     }
 
     @media (max-width: 900px) {
@@ -1088,7 +1103,7 @@ select {
       }
 
       &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 0;
@@ -1126,7 +1141,8 @@ select {
 
   .auth-right {
     width: 60%;
-    background: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1600') no-repeat center center/cover;
+    background: url("../../media/img/pexels-photo-1571460.jpeg") no-repeat
+      center center/cover;
     position: relative;
 
     @media (max-width: 1200px) {

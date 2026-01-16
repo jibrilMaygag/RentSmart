@@ -1,148 +1,192 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modern Apartment in Bole | RentSmart</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="../assets/css/style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- NAVBAR (Copied from index) -->
     <nav class="navbar">
-        <div class="container nav-wrapper">
-            <div class="logo">
-                <h2>RentSmart</h2>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="search-results.html">Rent</a></li>
-                <li><a href="search-results.html">Buy</a></li>
-                <li><a href="search-results.html">Locations</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="menu-toggle">☰</div>
-            <div class="nav-buttons">
-                <a href="login.html" class="btn-secondary">Login</a>
-                <a href="signup.html" class="btn-primary">Sign Up</a>
-            </div>
+      <div class="container nav-wrapper">
+        <div class="logo">
+          <h2>RentSmart</h2>
         </div>
+        <ul class="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="search-results.html">Rent</a></li>
+          <li><a href="search-results.html">Buy</a></li>
+          <li><a href="search-results.html">Locations</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-buttons">
+          <a href="login.html" class="btn-secondary">Login</a>
+          <a href="signup.html" class="btn-primary">Sign Up</a>
+        </div>
+      </div>
     </nav>
 
     <!-- MAIN CONTENT -->
-    <main class="container listing-header-section" style="padding-top: 120px;">
-
-        <!-- HEADER -->
-        <div style="width: 100%;">
-            <div class="listing-header-section">
-                <div>
-                    <span class="property-badge new"
-                        style="position:static; display: inline-block; margin-bottom: 0.5rem; background: #10b981; color: white;">FOR
-                        RENT</span>
-                    <h1>Modern Apartment in Bole</h1>
-                    <p style="font-size: 1.1rem;">Bole Atlas, Addis Ababa</p>
-                </div>
-                <div>
-                    <h2 class="price-tag">30,200 br</h2>
-                    <span style="color: #64748b;">/ month</span>
-                </div>
-            </div>
-
-            <!-- GALLERY -->
-            <div class="gallery-grid">
-                <div class="gallery-item gallery-main">
-                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg" alt="Main View">
-                </div>
-                <div class="gallery-item gallery-sub">
-                    <img src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg" alt="Bedroom">
-                </div>
-                <div class="gallery-item gallery-sub">
-                    <img src="https://images.pexels.com/photos/279746/pexels-photo-279746.jpeg" alt="Kitchen">
-                </div>
-            </div>
-
-            <div class="contact-grid" style="grid-template-columns: 2fr 1fr; gap: 3rem;">
-                <!-- LEFT COLUMN -->
-                <div class="details">
-                    <section style="margin-bottom: 3rem;">
-                        <h3>Description</h3>
-                        <p style="margin-top: 1rem;">
-                            Experience luxury living in this stunning modern apartment located in the heart of Bole.
-                            Features floor-to-ceiling windows offering breathtaking city views, a state-of-the-art
-                            kitchen,
-                            and spacious bedrooms. The building offers 24/7 security, a gym, and backup generator.
-                        </p>
-                    </section>
-
-                    <section style="margin-bottom: 3rem;">
-                        <h3>Property Details</h3>
-                        <div class="property-features"
-                            style="display: flex; gap: 2rem; margin-top: 1rem; margin-bottom: 2rem;">
-                            <span>🛏 2 Bedrooms</span>
-                            <span>🚿 2 Bathrooms</span>
-                            <span>📐 120 m²</span>
-                        </div>
-                    </section>
-
-                    <section>
-                        <h3>Amenities</h3>
-                        <div class="amenities-grid">
-                            <div class="amenity-item">🚗 Parking</div>
-                            <div class="amenity-item">🏋️ Gym</div>
-                            <div class="amenity-item">🛡 24/7 Security</div>
-                            <div class="amenity-item">🌐 High-speed Wifi</div>
-                            <div class="amenity-item">⚡ Generator</div>
-                            <div class="amenity-item">🌅 Balcony</div>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- RIGHT COLUMN (SIDEBAR) -->
-                <aside>
-                    <div class="info-card" style="position: sticky; top: 100px;">
-                        <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
-                            <img src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg"
-                                style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
-                            <div>
-                                <h4 style="margin:0;">Dawit Belete</h4>
-                                <p style="font-size: 0.9rem; margin:0;">Senior Agent</p>
-                            </div>
-                        </div>
-                        <form style="display: flex; flex-direction: column; gap: 1rem;">
-                            <input type="text" placeholder="Your Name">
-                            <input type="email" placeholder="Your Email">
-                            <input type="tel" placeholder="Your Phone">
-                            <textarea
-                                style="width: 100%; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 12px; font-family: inherit;"
-                                rows="3" placeholder="I am interested in this property..."></textarea>
-                            <button class="btn-primary" style="width: 100%;">Send Message</button>
-                        </form>
-                        <button class="btn-outline" style="width: 100%; margin-top: 1rem;">Call Agent</button>
-                    </div>
-                </aside>
-            </div>
+    <main class="container listing-header-section" style="padding-top: 120px">
+      <!-- HEADER -->
+      <div style="width: 100%">
+        <div class="listing-header-section">
+          <div>
+            <span
+              class="property-badge new"
+              style="
+                position: static;
+                display: inline-block;
+                margin-bottom: 0.5rem;
+                background: #10b981;
+                color: white;
+              "
+              >FOR RENT</span
+            >
+            <h1>Modern Apartment in Bole</h1>
+            <p style="font-size: 1.1rem">Bole Atlas, Addis Ababa</p>
+          </div>
+          <div>
+            <h2 class="price-tag">30,200 br</h2>
+            <span style="color: #64748b">/ month</span>
+          </div>
         </div>
+
+        <!-- GALLERY -->
+        <div class="gallery-grid">
+          <div class="gallery-item gallery-main">
+            <img src="../media/img/pexels-photo-106399.jpeg" alt="Main View" />
+          </div>
+          <div class="gallery-item gallery-sub">
+            <img src="../media/img/pexels-photo-1080721.jpeg" alt="Bedroom" />
+          </div>
+          <div class="gallery-item gallery-sub">
+            <img src="../media/img/pexels-photo-279746.jpeg" alt="Kitchen" />
+          </div>
+        </div>
+
+        <div
+          class="contact-grid"
+          style="grid-template-columns: 2fr 1fr; gap: 3rem"
+        >
+          <!-- LEFT COLUMN -->
+          <div class="details">
+            <section style="margin-bottom: 3rem">
+              <h3>Description</h3>
+              <p style="margin-top: 1rem">
+                Experience luxury living in this stunning modern apartment
+                located in the heart of Bole. Features floor-to-ceiling windows
+                offering breathtaking city views, a state-of-the-art kitchen,
+                and spacious bedrooms. The building offers 24/7 security, a gym,
+                and backup generator.
+              </p>
+            </section>
+
+            <section style="margin-bottom: 3rem">
+              <h3>Property Details</h3>
+              <div
+                class="property-features"
+                style="
+                  display: flex;
+                  gap: 2rem;
+                  margin-top: 1rem;
+                  margin-bottom: 2rem;
+                "
+              >
+                <span>🛏 2 Bedrooms</span>
+                <span>🚿 2 Bathrooms</span>
+                <span>📐 120 m²</span>
+              </div>
+            </section>
+
+            <section>
+              <h3>Amenities</h3>
+              <div class="amenities-grid">
+                <div class="amenity-item">🚗 Parking</div>
+                <div class="amenity-item">🏋️ Gym</div>
+                <div class="amenity-item">🛡 24/7 Security</div>
+                <div class="amenity-item">🌐 High-speed Wifi</div>
+                <div class="amenity-item">⚡ Generator</div>
+                <div class="amenity-item">🌅 Balcony</div>
+              </div>
+            </section>
+          </div>
+
+          <!-- RIGHT COLUMN (SIDEBAR) -->
+          <aside>
+            <div class="info-card" style="position: sticky; top: 100px">
+              <div
+                style="
+                  display: flex;
+                  gap: 1rem;
+                  align-items: center;
+                  margin-bottom: 1.5rem;
+                "
+              >
+                <img
+                  src="../media/img/pexels-photo-220453.jpeg"
+                  style="
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                  "
+                />
+                <div>
+                  <h4 style="margin: 0">Dawit Belete</h4>
+                  <p style="font-size: 0.9rem; margin: 0">Senior Agent</p>
+                </div>
+              </div>
+              <form style="display: flex; flex-direction: column; gap: 1rem">
+                <input type="text" placeholder="Your Name" />
+                <input type="email" placeholder="Your Email" />
+                <input type="tel" placeholder="Your Phone" />
+                <textarea
+                  style="
+                    width: 100%;
+                    padding: 1rem;
+                    border: 1px solid #e2e8f0;
+                    border-radius: 12px;
+                    font-family: inherit;
+                  "
+                  rows="3"
+                  placeholder="I am interested in this property..."
+                ></textarea>
+                <button class="btn-primary" style="width: 100%">
+                  Send Message
+                </button>
+              </form>
+              <button class="btn-outline" style="width: 100%; margin-top: 1rem">
+                Call Agent
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
     </main>
 
     <!-- FOOTER (Copied from index) -->
-    <footer class="footer" style="margin-top: 5rem;">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>RentSmart</h3>
-                    <p>Your trusted platform for renting and buying homes.</p>
-                </div>
-                <div class="footer-col">
-                    <p>© 2025 RentSmart</p>
-                </div>
-            </div>
+    <footer class="footer" style="margin-top: 5rem">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h3>RentSmart</h3>
+            <p>Your trusted platform for renting and buying homes.</p>
+          </div>
+          <div class="footer-col">
+            <p>© 2025 RentSmart</p>
+          </div>
         </div>
+      </div>
     </footer>
 
     <script src="../assets/javascript/script.js"></script>
-</body>
-
+  </body>
 </html>
