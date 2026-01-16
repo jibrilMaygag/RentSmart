@@ -188,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Intersection Observer for Animations ---
     const observerOptions = {
-        threshold: 0.1
+        threshold: 0,        // Trigger as soon as 1px is visible
+        rootMargin: '50px'   // Trigger slightly before element enters viewport
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -206,8 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
-        // INCREASE SPEED: 0.3s instead of 0.6s
-        el.style.transition = `all 0.3s ease ${index * 0.05}s`;
+
+        // No delay for first 4 items (immediate load)
+        // Then stagger based on column position
+        const delay = index < 4 ? 0 : (index % 4) * 0.1;
+
+        el.style.transition = `all 0.4s ease-out ${delay}s`;
         observer.observe(el);
     });
 
