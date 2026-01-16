@@ -2,176 +2,211 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Apartment in Bole | RentSmart</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Listings | RentSmart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 
 <body>
-  <!-- NAVBAR (Copied from index) -->
-  <nav class="navbar">
-    <div class="container nav-wrapper">
-      <div class="logo">
-        <h2>RentSmart</h2>
-      </div>
-      <ul class="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="search-results.html">Rent</a></li>
-        <li><a href="search-results.html">Buy</a></li>
-        <li><a href="search-results.html">Locations</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li class="mobile-only"><a href="login.html">Login</a></li>
-        <li class="mobile-only"><a href="signup.html">Sign Up</a></li>
-      </ul>
-      <div class="nav-buttons">
-        <a href="login.html" class="btn-secondary">Login</a>
-        <a href="signup.html" class="btn-primary">Sign Up</a>
-      </div>
-      <div class="menu-toggle">
-        <i class="fas fa-bars"></i>
-      </div>
-    </div>
-  </nav>
-
-  <!-- MAIN CONTENT -->
-  <main class="container listing-header-section" style="padding-top: 120px">
-    <!-- HEADER -->
-    <div style="width: 100%">
-      <div class="listing-header-section">
-        <div>
-          <span class="property-badge new" style="
-                position: static;
-                display: inline-block;
-                margin-bottom: 0.5rem;
-                background: #10b981;
-                color: white;
-              ">FOR RENT</span>
-          <h1>Modern Apartment in Bole</h1>
-          <p style="font-size: 1.1rem">Bole Atlas, Addis Ababa</p>
-        </div>
-        <div>
-          <h2 class="price-tag">30,200 br</h2>
-          <span style="color: #64748b">/ month</span>
-        </div>
-      </div>
-
-      <!-- GALLERY -->
-      <div class="gallery-grid">
-        <div class="gallery-item gallery-main">
-          <img src="assets/media/img/pexels-photo-106399.jpeg" alt="Main View" />
-        </div>
-        <div class="gallery-item gallery-sub">
-          <img src="assets/media/img/pexels-photo-1080721.jpeg" alt="Bedroom" />
-        </div>
-        <div class="gallery-item gallery-sub">
-          <img src="assets/media/img/pexels-photo-279746.jpeg" alt="Kitchen" />
-        </div>
-      </div>
-
-      <div class="contact-grid" style="grid-template-columns: 2fr 1fr; gap: 3rem">
-        <!-- LEFT COLUMN -->
-        <div class="details">
-          <section style="margin-bottom: 3rem">
-            <h3>Description</h3>
-            <p style="margin-top: 1rem">
-              Experience luxury living in this stunning modern apartment
-              located in the heart of Bole. Features floor-to-ceiling windows
-              offering breathtaking city views, a state-of-the-art kitchen,
-              and spacious bedrooms. The building offers 24/7 security, a gym,
-              and backup generator.
-            </p>
-          </section>
-
-          <section style="margin-bottom: 3rem">
-            <h3>Property Details</h3>
-            <div class="property-features" style="
-                  display: flex;
-                  gap: 2rem;
-                  margin-top: 1rem;
-                  margin-bottom: 2rem;
-                ">
-              <span>🛏 2 Bedrooms</span>
-              <span>🚿 2 Bathrooms</span>
-              <span>📐 120 m²</span>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">
+                <h2>RentSmart</h2>
             </div>
-          </section>
-
-          <section>
-            <h3>Amenities</h3>
-            <div class="amenities-grid">
-              <div class="amenity-item">🚗 Parking</div>
-              <div class="amenity-item">🏋️ Gym</div>
-              <div class="amenity-item">🛡 24/7 Security</div>
-              <div class="amenity-item">🌐 High-speed Wifi</div>
-              <div class="amenity-item">⚡ Generator</div>
-              <div class="amenity-item">🌅 Balcony</div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="search-results.html">Search</a></li>
+                <li><a href="listing.html">Listing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li class="mobile-only"><a href="login.html">Login</a></li>
+                <li class="mobile-only"><a href="signup.html">Sign Up</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="login.html" class="btn-secondary">Login</a>
+                <a href="signup.html" class="btn-primary">Sign Up</a>
             </div>
-          </section>
-        </div>
-
-        <!-- RIGHT COLUMN (SIDEBAR) -->
-        <aside>
-          <div class="info-card" style="position: sticky; top: 100px">
-            <div style="
-                  display: flex;
-                  gap: 1rem;
-                  align-items: center;
-                  margin-bottom: 1.5rem;
-                ">
-              <img src="assets/media/img/pexels-photo-220453.jpeg" style="
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                  " />
-              <div>
-                <h4 style="margin: 0">Dawit Belete</h4>
-                <p style="font-size: 0.9rem; margin: 0">Senior Agent</p>
-              </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
             </div>
-            <form style="display: flex; flex-direction: column; gap: 1rem">
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Your Email" />
-              <input type="tel" placeholder="Your Phone" />
-              <textarea style="
-                    width: 100%;
-                    padding: 1rem;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 12px;
-                    font-family: inherit;
-                  " rows="3" placeholder="I am interested in this property..."></textarea>
-              <button class="btn-primary" style="width: 100%">
-                Send Message
-              </button>
-            </form>
-            <button class="btn-outline" style="width: 100%; margin-top: 1rem">
-              Call Agent
-            </button>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </main>
-
-  <!-- FOOTER (Copied from index) -->
-  <footer class="footer" style="margin-top: 5rem">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <h3>RentSmart</h3>
-          <p>Your trusted platform for renting and buying homes.</p>
         </div>
-        <div class="footer-col">
-          <p>© 2025 RentSmart</p>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </nav>
 
-  <script src="assets/javascript/script.js"></script>
+    <!-- MAIN CONTENT -->
+    <main style="padding-top: 100px; padding-bottom: 4rem;">
+        <section class="featured-properties">
+            <div class="container">
+                <div class="section-header">
+                    <h2>All Properties</h2>
+                    <p>Explore our exclusive list of premium homes</p>
+                </div>
+
+                <div class="properties-grid">
+                    <!-- CARD 1 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-106399.jpeg" alt="Modern Apartment"
+                                loading="lazy" />
+                            <span class="property-badge new">New</span>
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">30,200 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">Modern Apartment</h3>
+                            <p class="property-location">Bole, Addis Ababa</p>
+                            <div class="property-features"><span>2 Bed</span><span>2 Bath</span><span>120 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2 -->
+                    <div class="property-card" data-mode="buy">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-164558.jpeg" alt="Luxury Villa" loading="lazy" />
+                            <span class="property-badge premium">Premium</span>
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">8,500,000 br</span>
+                            </div>
+                            <h3 class="property-title">Luxury Villa</h3>
+                            <p class="property-location">CMC, Addis Ababa</p>
+                            <div class="property-features"><span>4 Bed</span><span>3 Bath</span><span>350 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-323780.jpeg" alt="Cozy House" loading="lazy" />
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">25,000 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">Cozy House</h3>
+                            <p class="property-location">Sarbet, Addis Ababa</p>
+                            <div class="property-features"><span>3 Bed</span><span>2 Bath</span><span>200 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-259962_1.jpeg" alt="Penthouse" loading="lazy" />
+                            <span class="property-badge premium">Premium</span>
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">120,000 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">Skyline Penthouse</h3>
+                            <p class="property-location">Kazanchis, Addis Ababa</p>
+                            <div class="property-features"><span>3 Bed</span><span>4 Bath</span><span>280 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 5 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-1396122.jpeg" alt="Family Home" loading="lazy" />
+                            <span class="property-badge new">New</span>
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">40,000 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">Spacious Family Home</h3>
+                            <p class="property-location">Ayat, Addis Ababa</p>
+                            <div class="property-features"><span>4 Bed</span><span>3 Bath</span><span>300 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 6 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-271624.jpeg" alt="Studio" loading="lazy" />
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">15,000 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">Modern Studio</h3>
+                            <p class="property-location">Piassa, Addis Ababa</p>
+                            <div class="property-features"><span>1 Bed</span><span>1 Bath</span><span>55 m²</span></div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 7 -->
+                    <div class="property-card" data-mode="rent">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-2166553.jpeg" alt="Condo" loading="lazy" />
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">22,000 br</span><span class="period">/ mo</span>
+                            </div>
+                            <h3 class="property-title">City Condo</h3>
+                            <p class="property-location">4 Kilo, Addis Ababa</p>
+                            <div class="property-features"><span>2 Bed</span><span>1 Bath</span><span>90 m²</span></div>
+                        </div>
+                    </div>
+
+                    <!-- CARD 8 -->
+                    <div class="property-card" data-mode="buy">
+                        <div class="property-image">
+                            <img src="assets/media/img/pexels-photo-3225529.jpeg" alt="Mansion" loading="lazy" />
+                            <span class="property-badge premium">Premium</span>
+                            <button class="wishlist-btn">♥</button>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-price">
+                                <span class="price">25,000,000 br</span>
+                            </div>
+                            <h3 class="property-title">Diplomat Mansion</h3>
+                            <p class="property-location">Bole, Addis Ababa</p>
+                            <div class="property-features"><span>6 Bed</span><span>7 Bath</span><span>600 m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>RentSmart</h3>
+                    <p>Your trusted platform for renting and buying homes.</p>
+                </div>
+                <div class="footer-col">
+                    <p>© 2025 RentSmart</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/javascript/script.js"></script>
 </body>
 
 </html>

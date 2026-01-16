@@ -52,10 +52,9 @@ function setupSearchForm() {
 
         // Redirect to search results
         const queryString = params.toString();
-        // Since we don't have a backend, we'll just log or reload mock
-        console.log(`Searching for: ${queryString}`);
-        // window.location.href = `search-results.html?${queryString}`;
-        alert(`Search Initiated!\nMode: ${mode}\nParams: ${queryString}`);
+
+        // Redirect to search-results.html with params
+        window.location.href = `search-results.html?${queryString}`;
     });
 }
 

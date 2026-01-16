@@ -19,9 +19,8 @@
       </div>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="search-results.html">Rent</a></li>
-        <li><a href="search-results.html">Buy</a></li>
-        <li><a href="search-results.html">Locations</a></li>
+        <li><a href="search-results.html">Search</a></li>
+        <li><a href="listing.html">Listing</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li class="mobile-only"><a href="login.html">Login</a></li>
         <li class="mobile-only"><a href="signup.html">Sign Up</a></li>
@@ -40,6 +39,17 @@
     <!-- FILTERS -->
     <aside class="filters-sidebar">
       <h3 style="margin-bottom: 1.5rem">Filters</h3>
+      <div class="form-group" style="margin-bottom: 1.5rem">
+        <label style="display: block; margin-bottom: 0.5rem; font-weight: 600">I want to</label>
+        <div class="search-tabs"
+          style="display: flex; gap: 1rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.5rem;">
+          <button class="search-tab active" data-mode="rent"
+            style="background:none; border:none; font-weight:600; cursor:pointer; color:#2563eb; border-bottom: 2px solid #2563eb;">Rent</button>
+          <button class="search-tab" data-mode="buy"
+            style="background:none; border:none; font-weight:600; cursor:pointer; color:#64748b;">Buy</button>
+        </div>
+        <input type="hidden" id="filter-mode" value="rent">
+      </div>
       <div class="form-group" style="margin-bottom: 1.5rem">
         <label style="display: block; margin-bottom: 0.5rem; font-weight: 600">Location</label>
         <input type="text" placeholder="City, Neighborhood" />

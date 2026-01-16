@@ -848,7 +848,7 @@ select:focus {
 /* Auth Page */
 .auth-page {
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -1285,37 +1285,53 @@ select:focus {
     font-size: 15px;
   }
 
+  /* Improved Mobile Menu */
   .navbar .nav-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 70px;
+    /* Adjust based on navbar height */
     left: 0;
     width: 100%;
-    flex-direction: column;
+    height: calc(100vh - 70px);
     background: #ffffff;
     padding: 2rem;
     text-align: center;
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    gap: 1.5rem;
+    box-shadow: none;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .navbar .nav-menu.active {
+    transform: translateX(0);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   }
 
   .navbar .nav-menu .mobile-only {
     display: block;
-    margin-top: 0.5rem;
+    margin-top: 0;
   }
 
-  .navbar .nav-menu.active {
-    display: flex;
+  /* Buttons inside mobile menu */
+  .navbar .nav-menu li a {
+    font-size: 1.25rem;
+    color: #0f172a;
+    font-weight: 500;
   }
 
+  /* Hide Desktop Buttons */
   .navbar .nav-buttons {
     display: none;
   }
 
   .navbar .menu-toggle {
     display: block;
+    z-index: 1001;
   }
 
   .hero {
