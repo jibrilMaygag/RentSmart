@@ -11,7 +11,7 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
+  <!-- NAVBAR (Copied from index) -->
   <nav class="navbar">
     <div class="container nav-wrapper">
       <div class="logo">
@@ -19,8 +19,9 @@
       </div>
       <ul class="nav-menu">
         <li><a href="index.html">Home</a></li>
-        <li><a href="search-results.html">Search</a></li>
-        <li><a href="listing.html">Listing</a></li>
+        <li><a href="search-results.html">Rent</a></li>
+        <li><a href="search-results.html">Buy</a></li>
+        <li><a href="search-results.html">Locations</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li class="mobile-only"><a href="login.html">Login</a></li>
         <li class="mobile-only"><a href="signup.html">Sign Up</a></li>
@@ -36,24 +37,18 @@
   </nav>
 
   <!-- MAIN CONTENT -->
-  <main class="container listing-header-section" style="padding-top: 120px">
+  <main class="container listing-page-main">
     <!-- HEADER -->
-    <div style="width: 100%">
+    <div class="header-full-width">
       <div class="listing-header-section">
         <div>
-          <span class="property-badge new" style="
-                position: static;
-                display: inline-block;
-                margin-bottom: 0.5rem;
-                background: #10b981;
-                color: white;
-              ">FOR RENT</span>
+          <span class="property-badge new property-badge-static">FOR RENT</span>
           <h1>Modern Apartment in Bole</h1>
-          <p style="font-size: 1.1rem">Bole Atlas, Addis Ababa</p>
+          <p class="subtitle-large">Bole Atlas, Addis Ababa</p>
         </div>
         <div>
           <h2 class="price-tag">30,200 br</h2>
-          <span style="color: #64748b">/ month</span>
+          <span class="text-muted">/ month</span>
         </div>
       </div>
 
@@ -70,12 +65,12 @@
         </div>
       </div>
 
-      <div class="contact-grid" style="grid-template-columns: 2fr 1fr; gap: 3rem">
+      <div class="contact-grid property-layout">
         <!-- LEFT COLUMN -->
         <div class="details">
-          <section style="margin-bottom: 3rem">
+          <section class="section-margin">
             <h3>Description</h3>
-            <p style="margin-top: 1rem">
+            <p class="text-spaced">
               Experience luxury living in this stunning modern apartment
               located in the heart of Bole. Features floor-to-ceiling windows
               offering breathtaking city views, a state-of-the-art kitchen,
@@ -84,14 +79,9 @@
             </p>
           </section>
 
-          <section style="margin-bottom: 3rem">
+          <section class="section-margin">
             <h3>Property Details</h3>
-            <div class="property-features" style="
-                  display: flex;
-                  gap: 2rem;
-                  margin-top: 1rem;
-                  margin-bottom: 2rem;
-                ">
+            <div class="property-features property-features-flex">
               <span>🛏 2 Bedrooms</span>
               <span>🚿 2 Bathrooms</span>
               <span>📐 120 m²</span>
@@ -113,40 +103,24 @@
 
         <!-- RIGHT COLUMN (SIDEBAR) -->
         <aside>
-          <div class="info-card" style="position: sticky; top: 100px">
-            <div style="
-                  display: flex;
-                  gap: 1rem;
-                  align-items: center;
-                  margin-bottom: 1.5rem;
-                ">
-              <img src="assets/media/img/pexels-photo-220453.jpeg" style="
-                    width: 60px;
-                    height: 60px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                  " />
+          <div class="info-card agent-card-sticky">
+            <div class="agent-header">
+              <img src="assets/media/img/pexels-photo-220453.jpeg" class="agent-avatar" />
               <div>
-                <h4 style="margin: 0">Dawit Belete</h4>
-                <p style="font-size: 0.9rem; margin: 0">Senior Agent</p>
+                <h4 class="agent-name">Dawit Belete</h4>
+                <p class="agent-role">Senior Agent</p>
               </div>
             </div>
-            <form style="display: flex; flex-direction: column; gap: 1rem">
+            <form class="agent-form">
               <input type="text" placeholder="Your Name" />
               <input type="email" placeholder="Your Email" />
               <input type="tel" placeholder="Your Phone" />
-              <textarea style="
-                    width: 100%;
-                    padding: 1rem;
-                    border: 1px solid #e2e8f0;
-                    border-radius: 12px;
-                    font-family: inherit;
-                  " rows="3" placeholder="I am interested in this property..."></textarea>
-              <button class="btn-primary" style="width: 100%">
+              <textarea class="agent-textarea" rows="3" placeholder="I am interested in this property..."></textarea>
+              <button class="btn-primary btn-full">
                 Send Message
               </button>
             </form>
-            <button class="btn-outline" style="width: 100%; margin-top: 1rem">
+            <button class="btn-outline btn-full btn-margin-top">
               Call Agent
             </button>
           </div>
@@ -155,8 +129,9 @@
     </div>
   </main>
 
+  <!-- FOOTER (Copied from index) -->
   <!-- FOOTER -->
-  <footer class="footer" style="margin-top: 5rem">
+  <footer class="footer footer-spacing">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
@@ -164,8 +139,25 @@
           <p>Your trusted platform for renting and buying homes.</p>
         </div>
         <div class="footer-col">
-          <p>© 2025 RentSmart</p>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html?mode=rent">Rent</a></li>
+            <li><a href="search-results.html?mode=buy">Buy</a></li>
+            <li><a href="listing.html">All Properties</a></li>
+          </ul>
         </div>
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+            <a href="#">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 RentSmart. All rights reserved.</p>
       </div>
     </div>
   </footer>

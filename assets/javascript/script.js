@@ -173,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Card Click to Listing ---
-    // --- Card Click to Listing ---
     // Reuse propertyCards from top of scope
     if (propertyCards) {
         propertyCards.forEach(card => {

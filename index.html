@@ -104,7 +104,7 @@
 
       <div class="properties-grid">
         <!-- PROPERTY CARD 1 -->
-        <a href="property-detail.html" class="property-card">
+        <a href="property-detail.html" class="property-card" data-mode="rent">
           <div class="property-image">
             <img src="assets/media/img/pexels-photo-106399.jpeg" alt="Modern Apartment" loading="lazy" />
             <span class="property-badge new">New</span>
@@ -136,7 +136,7 @@
         </a>
 
         <!-- PROPERTY CARD 2 -->
-        <a href="property-detail.html" class="property-card">
+        <a href="property-detail.html" class="property-card" data-mode="buy">
           <div class="property-image">
             <img src="assets/media/img/pexels-photo-164558.jpeg" alt="Luxury Villa" loading="lazy" />
             <span class="property-badge premium">Premium</span>
@@ -169,7 +169,7 @@
         </a>
 
         <!-- PROPERTY CARD 3 -->
-        <a href="property-detail.html" class="property-card">
+        <a href="property-detail.html" class="property-card" data-mode="rent">
           <div class="property-image">
             <img src="assets/media/img/pexels-photo-271624.jpeg" alt="Cozy Studio" loading="lazy" />
 
@@ -201,7 +201,7 @@
         </a>
 
         <!-- PROPERTY CARD 4 -->
-        <a href="property-detail.html" class="property-card">
+        <a href="property-detail.html" class="property-card" data-mode="rent">
           <div class="property-image">
             <img src="assets/media/img/pexels-photo-323780_1.jpeg" alt="Family Home" loading="lazy" />
             <span class="property-badge new">New</span>
@@ -233,7 +233,7 @@
           </div>
         </a>
         <!-- PROPERTY CARD 5 -->
-        <a href="property-detail.html" class="property-card">
+        <a href="property-detail.html" class="property-card" data-mode="rent">
           <div class="property-image">
             <img src="assets/media/img/pexels-photo-1396122.jpeg" alt="Family House" loading="lazy" />
             <span class="property-badge premium">Premium</span>
@@ -264,10 +264,105 @@
             </div>
           </div>
         </a>
+
+        <!-- PROPERTY CARD 6 -->
+        <a href="property-detail.html" class="property-card" data-mode="rent">
+          <div class="property-image">
+            <img src="assets/media/img/pexels-photo-1080721.jpeg" alt="Modern Interior" loading="lazy" />
+            <button class="wishlist-btn" aria-label="Add to wishlist">
+              ♥
+            </button>
+          </div>
+
+          <div class="property-content">
+            <div class="property-price">
+              <span class="price">15,500birr</span>
+              <span class="period">/ month</span>
+            </div>
+
+            <h3 class="property-title">Downtown Loft</h3>
+            <p class="property-location">Addis Ababa, Piazza</p>
+
+            <div class="property-features">
+              <span>1 Bed</span>
+              <span>1 Bath</span>
+              <span>85 m²</span>
+            </div>
+
+            <div class="property-tags">
+              <span class="tag">City View</span>
+              <span class="tag">Modern</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROPERTY CARD 7 -->
+        <a href="property-detail.html" class="property-card" data-mode="rent">
+          <div class="property-image">
+            <img src="assets/media/img/pexels-photo-279746.jpeg" alt="Kitchen" loading="lazy" />
+            <span class="property-badge new">New</span>
+            <button class="wishlist-btn" aria-label="Add to wishlist">
+              ♥
+            </button>
+          </div>
+
+          <div class="property-content">
+            <div class="property-price">
+              <span class="price">45,000birr</span>
+              <span class="period">/ month</span>
+            </div>
+
+            <h3 class="property-title">Luxury Penthouse</h3>
+            <p class="property-location">Addis Ababa, Bole</p>
+
+            <div class="property-features">
+              <span>3 Beds</span>
+              <span>3 Baths</span>
+              <span>220 m²</span>
+            </div>
+
+            <div class="property-tags">
+              <span class="tag">Terrace</span>
+              <span class="tag">Concierge</span>
+              <span class="tag">Gym</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- PROPERTY CARD 8 -->
+        <a href="property-detail.html" class="property-card" data-mode="rent">
+          <div class="property-image">
+            <img src="assets/media/img/pexels-photo-1571460.jpeg" alt="Cozy Apartment" loading="lazy" />
+            <button class="wishlist-btn" aria-label="Add to wishlist">
+              ♥
+            </button>
+          </div>
+
+          <div class="property-content">
+            <div class="property-price">
+              <span class="price">18,000birr</span>
+              <span class="period">/ month</span>
+            </div>
+
+            <h3 class="property-title">Cozy Apartment</h3>
+            <p class="property-location">Addis Ababa, Gotera</p>
+
+            <div class="property-features">
+              <span>2 Beds</span>
+              <span>1 Bath</span>
+              <span>95 m²</span>
+            </div>
+
+            <div class="property-tags">
+              <span class="tag">Quiet</span>
+              <span class="tag">Parks</span>
+            </div>
+          </div>
+        </a>
       </div>
 
       <div class="view-more">
-        <a href="#" class="btn-outline large">View More</a>
+        <a href="listing.html" class="btn-outline large">View More</a>
       </div>
     </div>
   </section>
@@ -454,9 +549,10 @@
         <div class="footer-col">
           <h4>Quick Links</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Rent</a></li>
-            <li><a href="#">Buy</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="search-results.html?mode=rent">Rent</a></li>
+            <li><a href="search-results.html?mode=buy">Buy</a></li>
+            <li><a href="listing.html">All Properties</a></li>
           </ul>
         </div>
 
@@ -475,7 +571,7 @@
       </div>
     </div>
   </footer>
-  <script src="assets/javascript/main.js"></script>
+  <script src="assets/javascript/script.js"></script>
 </body>
 
 </html>
