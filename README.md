@@ -1,6 +1,6 @@
 # RentSmart
 
-A simple, modern mid-range rental management web application built by a team of six software engineering students. RentSmart helps streamline property listing, tenant management, and rental operations with an easy-to-use interface.
+A simple, modern rental management web application built by a team of six software engineering students. RentSmart helps streamline property listing, tenant management, and rental operations with an easy-to-use interface.
 
 ---
 
@@ -32,11 +32,11 @@ The goal is to keep everything simple, modern, and easy to navigate.
 
 ### **Frontend**
 
-- HTML5
-- CSS3
-- JavaScript
+- HTML5 (Semantic Structure)
+- CSS3 (Responsive Flexbox & Grid, Animations)
+- JavaScript (DOM Manipulation, Interactivity)
 
-### **Backend**
+### **Backend (Planned)**
 
 - PHP
 - MySQL
@@ -45,12 +45,13 @@ The goal is to keep everything simple, modern, and easy to navigate.
 
 ## 🚀 Features
 
-- User-friendly and responsive UI
-- Property listing pages
-- Tenant registration and management
-- Basic CRUD operations
-- MySQL database integration
-- Modern, clean layout suitable for mid-range projects
+- **Modern UI/UX**: Clean, responsive design suitable for both desktop and mobile users.
+- **Mobile Responsiveness**: Fully functional hamburger menu and mobile-optimized layouts.
+- **Property Listings**: Detailed property cards with image galleries and amenities.
+- **Search Functionality**: Advanced filtering by location, property type, and price range.
+- **Authentication**: Dedicated Login and Sign Up pages with social login options.
+- **Contact Form**: Integrated contact page for user inquiries.
+- **Animations**: Smooth fade-in and interaction animations for a premium feel.
 
 ---
 
@@ -58,29 +59,24 @@ The goal is to keep everything simple, modern, and easy to navigate.
 
 ```
 RentSmart/
-├── index.html
-├── listing1.html
-├── listing2.html
-├── listing3.html
-├── listing4.html
+├── index.html            # Homepage
+├── listing.html          # Individual Property Details
+├── search-results.html   # Search Results & Filtering
+├── contact.html          # Contact Us Page
+├── login.html            # Login Page
+├── signup.html           # Sign Up Page
 │
 ├── assets/
-│ ├── css/
-│ │ └── style.css
-│ └── js/
-│ └── script.js
+│   ├── css/
+│   │   └── style.css     # Main Stylesheet
+│   ├── javascript/
+│   │   ├── main.js       # Main Logic (Menu, Search, Animations)
+│   │   ├── script.js     # Secondary Pages Logic
+│   │   └── signup.js     # Signup Page Rendering
+│   ├── media/            # Images and Icons
+│   └── docs/             # Project Documentation
 │
-├── media/
-│ ├── images/
-│ │ └── ...
-│ └── icons/
-│ └── ...
-│
-├── docs/
-│ ├── project_proposal.doc
-│ └── project_synopsis.doc
-│
-├── .gitignore
+├── package.json
 └── README.md
 ```
 
@@ -88,28 +84,16 @@ RentSmart/
 
 ## ⚙️ Installation & Setup
 
-1. Clone or download the project.
-2. Import `rentsmart.sql` into your MySQL database.
-3. Configure `php/db.php` with your database credentials.
-4. Run the project using XAMPP, WAMP, or any PHP local server.
-5. Open the project in your browser at:
+Since the project is currently a static frontend:
 
-```
-http://localhost/RentSmart/
+1.  **Clone or Download** the repository.
+2.  **Open** the project folder.
+3.  **Run** the website:
+    -   Double-click `index.html` to open it in your browser.
+    -   OR use a local development server (e.g., Live Server in VS Code) for the best experience.
 
-### Compiling SCSS (optional)
-
-If you want to work on the SCSS source (`sass/style.scss`) and automatically compile it to `assets/css/style.css`:
-
-- Install dev dependencies: `npm install` (this will install `sass` from `package.json`).
-- Watch for changes and auto-build CSS: `npm run watch:css` 🔁
-- Build once: `npm run build:css` ✅
-
-Alternatively, without installing dependencies you can run:
-
-`npx sass --watch sass/style.scss:assets/css/style.css`
-
-```
+### Note on Backend
+The backend (PHP/MySQL) configuration steps will be added once the server-side logic is implemented.
 
 ---
 
