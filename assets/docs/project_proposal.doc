@@ -1,0 +1,123 @@
+
+# **Project Proposal**
+
+## **Project Title**
+
+**RentSmart: A Simple Home Renting Web Application**
+
+---
+
+## **Group Members**
+
+1. Hiruy Habtamu — ETS0717/16
+2. Kidus Mulugeta — ETS0828/16
+3. Ibsa Abera — ETS0734/16
+4. Jibril Maygag — ETS0755/16
+5. Kaleab Solomon — ETS0758/16
+6. Kenean Ayalew — ETS0796/16
+
+---
+
+## **1. Problem Statement (with Background)**
+
+In many cities, finding rental homes and apartments is still a frustrating process. People often depend on social media posts or local advertisements that are unverified or outdated. This makes it difficult for tenants to find suitable housing and for landlords to reach interested renters easily.
+
+The main issue is the lack of a simple and centralized web platform for listing, searching, and renting homes. A dedicated system would make this process more organized, reliable, and transparent.
+
+This project aims to solve the problem by developing a straightforward home renting web application that directly connects landlords and tenants.
+
+---
+
+## **2. Project Goal and Objectives**
+
+### **Goal**
+
+To design and develop a responsive web application that allows landlords and tenants to list, search, rent, and sell residential homes and apartments.
+
+### **Objectives**
+
+1. To develop a working web application using PHP, MySQL, HTML, CSS, and JavaScript.
+2. To allow landlords to register and post property listings with descriptions and images.
+3. To allow tenants to browse, search, and send booking inquiries.
+4. To provide a basic admin panel for managing listings and users.
+5. To ensure the system is responsive and easy to use across different devices.
+
+---
+
+## **3. Scope of the Project**
+
+### **In Scope**
+
+* User registration and login for landlords, tenants, and admin
+* Property listing, search, and filtering functions
+* Booking inquiry form
+* Basic admin dashboard for managing content
+* Responsive design using HTML, CSS, and JavaScript
+
+### **Out of Scope**
+
+* Payment integration or online transactions
+* Mobile application development
+* Real-time chat system
+* Advanced recommendation algorithms
+
+---
+
+## **4. Significance of the Project and SDLC Model**
+
+### **Significance**
+
+This project provides hands-on experience in full-stack web development and demonstrates the application of software engineering principles in real-life systems.
+
+RentSmart serves as a practical learning project that strengthens understanding of requirement analysis, system design, database management, and teamwork in software development.
+
+### **SDLC Model: Rapid Application Development (RAD)**
+
+The Rapid Application Development (RAD) model is selected because it supports fast prototyping, frequent user feedback, and quick iteration. This makes it suitable for student projects with limited time and resources.
+
+---
+
+## **5. Methodology and SDLC Phases**
+
+| **SDLC Phase**          | **Description**                                                      | **Tools / Techniques**              | **Team Roles**                   |
+| ----------------------- | -------------------------------------------------------------------- | ----------------------------------- | -------------------------------- |
+| Requirement Gathering   | Identify system requirements through brainstorming and small surveys | Google Forms, Discussion Notes      | Project Manager & Analyst        |
+| System Design           | Create wireframes, ER diagrams, and plan database and UI layout      | Figma, Draw.io, MySQL Workbench     | System Designer & Database Admin |
+| Implementation (Coding) | Develop frontend and backend functionality                           | Visual Studio Code, XAMPP           | Developers                       |
+| Testing                 | Test all modules for functionality and errors                        | Manual Testing, Browser Debug Tools | Testers                          |
+| Deployment              | Deploy locally and optionally online for demonstration               | XAMPP, GitHub, 000webhost           | Deployment Lead                  |
+| Maintenance             | Fix bugs and improve system based on feedback                        | Git for version control             | All Members                      |
+
+---
+
+## **6. Project Schedule**
+
+| **Date Range**  | **Phase / Task**                 | **Expected Output**         |
+| --------------- | -------------------------------- | --------------------------- |
+| Oct 21 – Oct 24 | Proposal Preparation             | Completed proposal          |
+| Oct 25 – Oct 31 | Requirement Gathering & Planning | Requirements document       |
+| Nov 1 – Nov 7   | System Design                    | ER diagram, UI mockups      |
+| Nov 8 – Nov 20  | Implementation                   | Working prototype           |
+| Nov 21 – Nov 27 | Testing & Debugging              | Stable version of RentSmart |
+| Nov 28 – Dec 4  | Deployment & Documentation       | Hosted web app and report   |
+| Dec 5 – Dec 6   | Presentation                     | Final demo and slides       |
+
+---
+
+## **7. References**
+
+* W3Schools. (2024). *PHP and MySQL Web Development Tutorials*.
+  [https://www.w3schools.com/php](https://www.w3schools.com/php)
+
+* Mozilla Developer Network (MDN). (2024). *HTML, CSS, and JavaScript Guides*.
+  [https://developer.mozilla.org](https://developer.mozilla.org)
+
+* Figma Community. (2024). *Web App Design Inspiration and Templates*.
+  [https://www.figma.com/community](https://www.figma.com/community)
+
+* GeeksforGeeks. (2024). *Rapid Application Development Model Explained*.
+  [https://www.geeksforgeeks.org](https://www.geeksforgeeks.org)
+
+* TutorialsPoint. (2024). *Database Design and ER Modeling in MySQL*.
+  [https://www.tutorialspoint.com](https://www.tutorialspoint.com)
+
