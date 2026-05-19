@@ -1,0 +1,5 @@
+Options -Indexes
+# Rewrite requests for missing files to the real assets directory
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ ../../assets/$1 [L]
