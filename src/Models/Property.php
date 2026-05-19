@@ -297,7 +297,7 @@ class Property extends BaseModel
     {
         $property = $this->firstWhere('id = ? AND landlord_id = ?', [$propertyId, $landlordId]);
         if (!$property) {
-            throw new RuntimeException('Property not found.');
+            throw new RuntimeException('Listing not found.');
         }
 
         $this->db->beginTransaction();
@@ -353,7 +353,7 @@ class Property extends BaseModel
     public function updateStatusForLandlord(int $propertyId, int $landlordId, string $status): bool
     {
         if (!in_array($status, ['available', 'pending', 'rented', 'sold'], true)) {
-            throw new RuntimeException('Invalid property status.');
+            throw new RuntimeException('Please choose a valid listing status.');
         }
 
         $this->db->query(
@@ -368,7 +368,7 @@ class Property extends BaseModel
     {
         $property = $this->firstWhere('id = ? AND landlord_id = ?', [$propertyId, $landlordId]);
         if (!$property) {
-            throw new RuntimeException('Property not found.');
+            throw new RuntimeException('Listing not found.');
         }
 
         $images = $this->db->query(

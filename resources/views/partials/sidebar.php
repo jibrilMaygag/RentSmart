@@ -8,7 +8,7 @@ $primarySectionIcon = $role === 'landlord' ? 'home_work' : 'favorite';
 <aside class="fixed inset-y-0 left-0 hidden w-72 border-r border-outline-variant/20 bg-surface-container-low lg:flex lg:flex-col">
   <div class="px-6 py-6">
     <a href="<?= route('') ?>" class="text-2xl font-semibold tracking-tight text-primary">RentSmart</a>
-    <p class="mt-2 text-sm text-on-surface-variant"><?= e(ucfirst($role)) ?> workspace</p>
+    <p class="mt-2 text-sm text-on-surface-variant"><?= e(ucfirst($role)) ?> dashboard</p>
   </div>
 
   <nav class="flex-1 space-y-1 px-4">

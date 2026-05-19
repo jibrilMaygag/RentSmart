@@ -54,7 +54,7 @@ $includeAppScript = $includeAppScript ?? true;
 
     <div class="mt-10 flex flex-col gap-3 border-t border-outline-variant/20 pt-6 text-sm text-on-surface-variant sm:flex-row sm:items-center sm:justify-between">
       <p>&copy; <?= date('Y') ?> RentSmart. All rights reserved.</p>
-      <p>Built for modern renting, without rebuilding the backend.</p>
+      <p>Helping renters and landlords move with confidence.</p>
     </div>
   </div>
 </footer>

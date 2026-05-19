@@ -20,7 +20,7 @@ class AuthMiddleware
     public function requireAuth(string $redirectTo = 'login'): void
     {
         if (!$this->auth->check()) {
-            flash('error', 'You must be logged in to access that page.');
+            flash('error', 'Please sign in to continue.');
             redirect($redirectTo);
         }
     }

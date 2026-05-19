@@ -6,7 +6,7 @@
  */
 $pageTitle = 'Landlord Inbox | RentSmart';
 $pageHeading = 'Messages';
-$pageSubheading = 'Review renter inquiries connected to your live property listings.';
+$pageSubheading = 'Review renter inquiries for your listings.';
 $bodyClass = 'dashboard-shell';
 $layoutMode = 'dashboard';
 $dashboardSection = 'messages';
@@ -24,7 +24,7 @@ include __DIR__ . '/../partials/header.php';
     <div>
       <h2 class="text-3xl font-semibold tracking-tight text-primary">Landlord inbox</h2>
       <p class="mt-3 max-w-3xl text-base leading-7 text-on-surface-variant">
-        View renter inquiries, check sender details, and track which property each message references.
+        Review renter inquiries, see sender details, and keep track of which listing each message is about.
       </p>
     </div>
     <div class="flex flex-wrap gap-3">
@@ -69,7 +69,7 @@ include __DIR__ . '/../partials/header.php';
       <div class="px-6 py-12 text-center">
         <span class="material-symbols-outlined text-5xl text-primary-fixed-variant">mail</span>
         <p class="mt-4 text-lg font-semibold tracking-tight text-primary">No messages yet</p>
-        <p class="mt-3 text-sm leading-6 text-on-surface-variant">Renter inquiries will appear here as soon as someone sends a message from a property page.</p>
+        <p class="mt-3 text-sm leading-6 text-on-surface-variant">New renter messages will show up here as soon as someone gets in touch.</p>
       </div>
       <?php endif; ?>
     </aside>
@@ -117,7 +117,7 @@ include __DIR__ . '/../partials/header.php';
         <span class="material-symbols-outlined text-6xl text-primary-fixed-variant">mark_email_read</span>
         <h3 class="mt-5 text-2xl font-semibold tracking-tight text-primary">Select a message to read it</h3>
         <p class="mt-3 max-w-xl text-base leading-7 text-on-surface-variant">
-          Your inbox is connected. Choose any inquiry from the left column to see the full renter message and property reference.
+          Choose any inquiry from the left to view the full message and related property details.
         </p>
       </div>
       <?php endif; ?>

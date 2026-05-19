@@ -35,7 +35,7 @@ include __DIR__ . '/partials/header.php';
         <h1 class="text-3xl font-semibold tracking-tight text-primary sm:text-4xl"><?= e($resultHeading) ?></h1>
         <p class="mt-3 text-base leading-7 text-on-surface-variant">
           <?= number_format(count($properties)) ?> result<?= count($properties) === 1 ? '' : 's' ?> found.
-          Refine the existing RentSmart search using live backend filters.
+          Use the filters to narrow down homes that fit your needs.
         </p>
       </div>
       <div class="flex flex-wrap gap-3 text-sm text-on-surface-variant">

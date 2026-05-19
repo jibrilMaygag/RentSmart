@@ -92,7 +92,7 @@ include __DIR__ . '/partials/header.php';
         </a>
         <?php else: ?>
         <div class="rounded-2xl bg-surface-container-low px-4 py-4 text-sm leading-6 text-on-surface-variant">
-          Saved properties are currently available on renter accounts.
+          Saved properties are available for renter accounts.
         </div>
         <?php endif; ?>
       </div>
@@ -129,7 +129,7 @@ include __DIR__ . '/partials/header.php';
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary">Listing type</p>
             <p class="mt-3 text-xl font-semibold tracking-tight text-primary"><?= e(ucfirst($property['property_type'] ?? 'Property')) ?></p>
             <p class="mt-2 text-sm leading-6 text-on-surface-variant">
-              Detailed images, landlord contact information, and amenities are connected to the live backend data for this listing.
+              See the essentials at a glance, from amenities to contact details.
             </p>
           </div>
           <?php endif; ?>
@@ -137,9 +137,9 @@ include __DIR__ . '/partials/header.php';
           <?php if (count($thumbnailImages) < 1): ?>
           <div class="rounded-[1.25rem] border border-outline-variant/20 bg-primary p-5 text-white shadow-soft">
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-secondary-container">RentSmart</p>
-            <p class="mt-3 text-xl font-semibold tracking-tight">Property details that stay in sync.</p>
+            <p class="mt-3 text-xl font-semibold tracking-tight">Everything you need to decide with confidence.</p>
             <p class="mt-2 text-sm leading-6 text-slate-200">
-              Views, favorites, pricing, and contact details all come from the existing PHP backend.
+              Review pricing, photos, and key details before reaching out.
             </p>
           </div>
           <?php endif; ?>
@@ -220,7 +220,7 @@ include __DIR__ . '/partials/header.php';
             <?php endif; ?>
           <?php elseif ($isLandlordOwner): ?>
           <div class="rounded-2xl bg-surface-container-low px-4 py-4 text-sm leading-6 text-on-surface-variant">
-            This is your listing. You can update the property details, status, and media from the landlord dashboard.
+            This is your listing. Update the details, availability, or photos from your dashboard.
           </div>
           <a href="<?= route('dashboard/listings/' . (int)$property['id'] . '/edit') ?>" class="btn-primary w-full justify-center">
             <span class="material-symbols-outlined text-base">edit_square</span>
@@ -228,7 +228,7 @@ include __DIR__ . '/partials/header.php';
           </a>
           <?php elseif ($user): ?>
           <div class="rounded-2xl bg-surface-container-low px-4 py-4 text-sm leading-6 text-on-surface-variant">
-            Property inquiries are currently available to renter accounts. Switch to a renter account to contact this landlord directly.
+            Only renter accounts can send inquiries to landlords directly.
           </div>
           <a href="<?= route('dashboard') ?>" class="btn-secondary w-full justify-center">
             <span class="material-symbols-outlined text-base">dashboard</span>
@@ -236,7 +236,7 @@ include __DIR__ . '/partials/header.php';
           </a>
           <?php else: ?>
           <div class="rounded-2xl bg-surface-container-low px-4 py-4 text-sm leading-6 text-on-surface-variant">
-            Sign in to send an inquiry, reveal landlord contact details, and save this property to your dashboard.
+            Sign in to send a message, view contact options, and save this property.
           </div>
           <a href="<?= route('login') ?>" class="btn-primary w-full justify-center">
             <span class="material-symbols-outlined text-base">login</span>
@@ -248,7 +248,7 @@ include __DIR__ . '/partials/header.php';
         <div class="mt-6 border-t border-outline-variant/20 pt-6">
           <p class="text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant">Need help?</p>
           <p class="mt-3 text-sm leading-6 text-on-surface-variant">
-            Use the existing contact flow if you need listing assistance, landlord verification, or support with your account.
+            Need help with this listing or your account? Our support team is here to help.
           </p>
           <a href="<?= route('contact') ?>" class="btn-secondary mt-5 w-full justify-center">
             <span class="material-symbols-outlined text-base">support_agent</span>

@@ -21,7 +21,7 @@ include __DIR__ . '/../partials/header.php';
     <div>
       <h2 class="text-3xl font-semibold tracking-tight text-primary">Your saved properties</h2>
       <p class="mt-3 max-w-3xl text-base leading-7 text-on-surface-variant">
-        Everything here is connected to the existing favorites backend. Remove a property instantly or open its detail page to continue comparing homes.
+        Keep track of the homes you want to revisit. Open any listing to compare details or remove it from your saved list.
       </p>
     </div>
     <a href="<?= route('search') ?>" class="btn-primary">

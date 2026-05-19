@@ -24,7 +24,7 @@ include __DIR__ . '/../partials/header.php';
       <div>
         <h1 class="text-3xl font-semibold tracking-tight text-primary">Contact the landlord</h1>
         <p class="mt-3 text-base leading-7 text-on-surface-variant">
-          Send a direct inquiry about this property. Your message will appear in the landlord inbox inside RentSmart.
+          Send a direct message about this property and the landlord will receive it in their inbox.
         </p>
       </div>
 
@@ -129,7 +129,7 @@ include __DIR__ . '/../partials/header.php';
           </div>
         </div>
         <p class="mt-5 text-sm leading-6 text-on-surface-variant">
-          Typical response time is usually within a few hours once the landlord checks the dashboard inbox.
+          Most landlords reply within a few hours, depending on availability.
         </p>
       </div>
     </aside>

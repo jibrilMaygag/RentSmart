@@ -33,7 +33,7 @@ class AuthController extends BaseController
                   ->required('password', 'Password');
 
         if (!$validator->passes()) {
-            $this->flash('error', 'Please fill in all required fields correctly.');
+            $this->flash('error', 'Please complete all required fields.');
             $this->redirect('login');
         }
 
@@ -99,11 +99,11 @@ class AuthController extends BaseController
             ]);
 
             unset($_SESSION['old_input']);
-            $this->flash('success', 'Account created successfully! Please log in.');
+            $this->flash('success', 'Your account is ready. Please sign in.');
             $this->redirect('login');
         } catch (Exception $e) {
             error_log('Signup error: ' . $e->getMessage());
-            $this->flash('error', 'An error occurred during signup. Please try again.');
+            $this->flash('error', 'We could not create your account right now. Please try again.');
             $this->redirect('signup');
         }
     }
@@ -113,7 +113,7 @@ class AuthController extends BaseController
         $this->requireAuth();
         $authService = new AuthService();
         $authService->logout();
-        $this->flash('success', 'You have been logged out successfully.');
+        $this->flash('success', 'You have been signed out.');
         $this->redirect('');
     }
 }

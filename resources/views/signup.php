@@ -18,7 +18,7 @@ include __DIR__ . '/partials/head.php';
       <div>
         <a href="<?= route('') ?>" class="text-4xl font-semibold tracking-[-0.03em]">RentSmart</a>
         <p class="mt-4 max-w-md text-lg leading-8 text-slate-200">
-          Join the existing RentSmart marketplace to browse, save, and manage properties through the same stable PHP backend.
+          Join RentSmart to browse listings, save favorites, and manage properties with ease.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ include __DIR__ . '/partials/head.php';
         </div>
         <div class="rounded-[1.5rem] border border-white/10 bg-white/10 p-5 backdrop-blur-md">
           <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Landlord</p>
-          <p class="mt-3 text-sm leading-7 text-slate-100">Access your listing dashboard and use the connected property pages already backed by MySQL.</p>
+          <p class="mt-3 text-sm leading-7 text-slate-100">Publish listings and keep track of renter interest in one place.</p>
         </div>
       </div>
     </div>
@@ -42,7 +42,7 @@ include __DIR__ . '/partials/head.php';
       <div class="mt-10">
         <h1 class="text-3xl font-semibold tracking-tight text-primary">Create your account</h1>
         <p class="mt-3 text-base leading-7 text-on-surface-variant">
-          Choose your role and start using the live RentSmart experience right away.
+          Choose your role and get started in minutes.
         </p>
       </div>
 
@@ -97,7 +97,7 @@ include __DIR__ . '/partials/head.php';
               <span class="block rounded-[1.25rem] border border-outline-variant/30 bg-surface-container-low p-5 transition peer-checked:border-secondary peer-checked:bg-secondary-container peer-checked:text-on-secondary-container group-hover:border-secondary/50">
                 <span class="material-symbols-outlined">home_work</span>
                 <span class="mt-3 block text-lg font-semibold tracking-tight">Landlord</span>
-                <span class="mt-2 block text-sm leading-6 text-inherit/80">Managing listings and property visibility.</span>
+                <span class="mt-2 block text-sm leading-6 text-inherit/80">Posting and managing property listings.</span>
               </span>
             </label>
           </div>

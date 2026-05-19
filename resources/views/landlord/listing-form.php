@@ -11,7 +11,7 @@ $pageTitle = $isEditing ? 'Edit Listing | RentSmart' : 'Create Listing | RentSma
 $pageHeading = $isEditing ? 'Edit Listing' : 'Post New Listing';
 $pageSubheading = $isEditing
     ? 'Update pricing, images, amenities, and status for this property.'
-    : 'Create a new property listing using the same backend and shared dashboard shell.';
+    : 'Create a new listing and share it with renters on RentSmart.';
 $bodyClass = 'dashboard-shell';
 $layoutMode = 'dashboard';
 $dashboardSection = $isEditing ? 'listings' : 'create';
@@ -74,11 +74,11 @@ include __DIR__ . '/../partials/header.php';
         <span class="material-symbols-outlined text-base">arrow_back</span>
         Back to My Listings
       </a>
-      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-primary"><?= e($isEditing ? 'Refine your property listing' : 'Create a polished new listing') ?></h2>
+      <h2 class="mt-4 text-3xl font-semibold tracking-tight text-primary"><?= e($isEditing ? 'Refine your property listing' : 'Create a new listing') ?></h2>
       <p class="mt-3 max-w-3xl text-base leading-7 text-on-surface-variant">
         <?= e($isEditing
-          ? 'These updates will apply to the live property pages and dashboard cards immediately.'
-          : 'Fill in the details below to publish a listing that fits the existing RentSmart marketplace and landlord workflow.') ?>
+          ? 'Changes will appear on your listing as soon as you save them.'
+          : 'Add the details renters need to understand the property at a glance.') ?>
       </p>
     </div>
     <a href="<?= route('dashboard/messages') ?>" class="btn-secondary">
@@ -90,15 +90,15 @@ include __DIR__ . '/../partials/header.php';
   <section class="mt-8 grid gap-4 md:grid-cols-3">
     <div class="dashboard-panel p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">1. Details</p>
-      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Property type, address, pricing, and essential metadata.</p>
+      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Add the location, pricing, and core property information.</p>
     </div>
     <div class="dashboard-panel p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">2. Media</p>
-      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Upload listing images and keep the gallery presentation clean.</p>
+      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Upload clear photos to help renters picture the space.</p>
     </div>
     <div class="dashboard-panel p-5">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">3. Publish</p>
-      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Choose status and save the listing into the live backend.</p>
+      <p class="mt-3 text-sm leading-6 text-on-surface-variant">Choose the listing status and save when you are ready.</p>
     </div>
   </section>
 
@@ -319,7 +319,7 @@ include __DIR__ . '/../partials/header.php';
       </div>
       <?php else: ?>
       <div class="mt-6 rounded-[1.5rem] bg-surface-container-low px-5 py-5 text-sm leading-6 text-on-surface-variant">
-        Amenities have not been configured in the database yet. You can still publish the listing and add amenities later.
+        Amenities can be added later. You can still publish this listing now.
       </div>
       <?php endif; ?>
     </div>

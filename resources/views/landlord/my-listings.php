@@ -7,7 +7,7 @@
  */
 $pageTitle = 'My Listings | RentSmart';
 $pageHeading = 'My Listings';
-$pageSubheading = 'Manage your live portfolio, adjust statuses, and update listing details.';
+$pageSubheading = 'Manage your portfolio, update availability, and keep listing details current.';
 $bodyClass = 'dashboard-shell';
 $layoutMode = 'dashboard';
 $dashboardSection = 'listings';
@@ -31,7 +31,7 @@ include __DIR__ . '/../partials/header.php';
     <div>
       <h2 class="text-3xl font-semibold tracking-tight text-primary">Your property portfolio</h2>
       <p class="mt-3 max-w-3xl text-base leading-7 text-on-surface-variant">
-        View listings from the database, open the public detail page, edit details, change availability, or remove a property entirely.
+        Review your listings, open the public page, update details, change availability, or remove a property when needed.
       </p>
     </div>
     <div class="flex flex-col gap-3 sm:flex-row">

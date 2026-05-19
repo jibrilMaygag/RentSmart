@@ -104,7 +104,7 @@ class HomeController extends BaseController
         $user = $this->user();
 
         if (!$user || $user['role'] !== 'renter') {
-            $this->flash('error', 'Only renters can access saved properties.');
+            $this->flash('error', 'Saved properties are only available for renter accounts.');
             $this->redirect('dashboard');
         }
 
@@ -163,7 +163,7 @@ class HomeController extends BaseController
             unset($_SESSION['contact_old_input']);
             $this->flash('success', 'Your message has been sent! We\'ll be in touch soon.');
         } catch (Exception $e) {
-            $this->flash('error', 'Failed to send message. Please try again.');
+            $this->flash('error', 'We could not send your message right now. Please try again.');
         }
 
         $this->redirect('contact');

@@ -15,7 +15,7 @@ include __DIR__ . '/partials/header.php';
     <span class="section-eyebrow">Support</span>
     <h1 class="text-3xl font-semibold tracking-tight text-primary sm:text-4xl">Contact the RentSmart team</h1>
     <p class="mt-4 max-w-2xl text-base leading-7 text-on-surface-variant">
-      The backend contact flow is already wired in. Send a message for account help, listing support, or any property-related question.
+      Send us a message if you need help with your account, a listing, or anything else on RentSmart.
     </p>
   </section>
 
@@ -124,7 +124,7 @@ include __DIR__ . '/partials/header.php';
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Listing assistance</p>
         <h3 class="mt-4 text-2xl font-semibold tracking-tight">Need help publishing or managing a property?</h3>
         <p class="mt-4 text-sm leading-7 text-slate-200">
-          RentSmart already supports landlord dashboards and property detail pages. Use this form when you need operational help with listings or account access.
+          Reach out if you need help posting a property, updating a listing, or accessing your account.
         </p>
       </div>
     </aside>

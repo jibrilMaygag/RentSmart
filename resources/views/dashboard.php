@@ -8,7 +8,7 @@ $isLandlord = ($user['role'] ?? 'renter') === 'landlord';
 $pageTitle = $isLandlord ? 'Landlord Dashboard | RentSmart' : 'Renter Dashboard | RentSmart';
 $pageHeading = $isLandlord ? 'Landlord Dashboard' : 'Renter Dashboard';
 $pageSubheading = $isLandlord
-    ? 'Review your live listings and stay connected to property activity.'
+    ? 'Review your listings and keep up with renter activity.'
     : 'Keep track of saved homes and continue your search with confidence.';
 $bodyClass = 'dashboard-shell';
 $layoutMode = 'dashboard';
@@ -17,8 +17,8 @@ $primaryItems = $isLandlord ? $myProperties : $favorites;
 $primarySectionId = $isLandlord ? 'my-listings' : 'saved-properties';
 $primarySectionTitle = $isLandlord ? 'My Listings' : 'Saved Properties';
 $primarySectionDescription = $isLandlord
-    ? 'These cards are rendering your current landlord listings from the existing backend.'
-    : 'These are the properties you have already saved using the existing favorites endpoint.';
+    ? 'Keep an eye on your active listings and jump into updates whenever you need to.'
+    : 'These are the homes you have saved for later.';
 
 include __DIR__ . '/partials/head.php';
 include __DIR__ . '/partials/sidebar.php';
@@ -38,8 +38,8 @@ include __DIR__ . '/partials/header.php';
             </h2>
             <p class="mt-4 max-w-2xl text-base leading-7 text-on-surface-variant">
               <?= $isLandlord
-                ? 'Your dashboard is connected to the same listings, property pages, and contact workflows already running in RentSmart.'
-                : 'Your dashboard is connected to the same saved properties, detail pages, and search results already powered by RentSmart.' ?>
+                ? 'Track your listings, review interest, and keep your property details up to date.'
+                : 'Revisit saved homes, compare options, and pick up your search anytime.' ?>
             </p>
           </div>
 
@@ -101,8 +101,8 @@ include __DIR__ . '/partials/header.php';
           </h4>
           <p class="mx-auto mt-3 max-w-xl text-base leading-7 text-on-surface-variant">
             <?= $isLandlord
-              ? 'Your landlord dashboard is ready, but there are no active listings tied to this account yet. Use the contact flow if you need help publishing one.'
-              : 'Save a property from the browse or detail pages and it will appear here immediately through the existing favorites backend.' ?>
+              ? 'You do not have any listings yet. When you are ready, create one or contact support for help getting started.'
+              : 'Save homes from the browse page or any property detail page to keep them here.' ?>
           </p>
           <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
             <a href="<?= route('search') ?>" class="btn-primary"><?= $isLandlord ? 'Browse marketplace' : 'Browse properties' ?></a>
@@ -127,7 +127,7 @@ include __DIR__ . '/partials/header.php';
         </div>
         <div class="mt-6 space-y-4 text-sm leading-6 text-on-surface-variant">
           <p><?= $isLandlord ? 'You can review your listings and open each public property page from here.' : 'You can revisit saved homes and continue exploring from the search page.' ?></p>
-          <p>Authentication, sessions, and dashboard routing are still powered by the existing backend.</p>
+          <p>Everything you need is just a few clicks away from your dashboard.</p>
         </div>
       </div>
 
@@ -160,10 +160,10 @@ include __DIR__ . '/partials/header.php';
       </div>
 
       <div class="overflow-hidden rounded-[1.75rem] bg-primary p-7 text-white shadow-float">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Unified application</p>
-        <h3 class="mt-4 text-2xl font-semibold tracking-tight">One platform, consistent experience.</h3>
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Everything in one place</p>
+        <h3 class="mt-4 text-2xl font-semibold tracking-tight">Stay on top of your next move.</h3>
         <p class="mt-4 text-sm leading-7 text-slate-200">
-          Your dashboard integrates with every part of the RentSmart platform, giving you a professional, cohesive experience across all features and workflows.
+          From saved homes to active listings and inquiries, your dashboard keeps the essentials close at hand.
         </p>
       </div>
     </aside>

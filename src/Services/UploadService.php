@@ -28,7 +28,7 @@ class UploadService
         $destPath = $this->propertyUploadDir . DIRECTORY_SEPARATOR . $filename;
 
         if (!move_uploaded_file($file['tmp_name'], $destPath)) {
-            throw new RuntimeException('Failed to move uploaded file.');
+            throw new RuntimeException('We could not upload that image. Please try again.');
         }
 
         return PROPERTY_UPLOADS_SUBDIR . '/' . $filename;
@@ -37,22 +37,22 @@ class UploadService
     private function validateFile(array $file): void
     {
         if ($file['error'] !== UPLOAD_ERR_OK) {
-            throw new RuntimeException('Upload error code: ' . $file['error']);
+            throw new RuntimeException('We could not process that upload. Please try again.');
         }
         if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
-            throw new RuntimeException('Invalid upload source.');
+            throw new RuntimeException('That image upload could not be verified. Please try again.');
         }
         if ($file['size'] > MAX_FILE_SIZE) {
-            throw new RuntimeException('File exceeds maximum allowed size (' . formatBytes(MAX_FILE_SIZE) . ').');
+            throw new RuntimeException('That image is too large. Maximum size: ' . formatBytes(MAX_FILE_SIZE) . '.');
         }
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $mime  = $finfo->file($file['tmp_name']);
         if (!in_array($mime, ALLOWED_MIME_TYPES, true)) {
-            throw new RuntimeException('Invalid file type. Allowed: JPG, PNG, WebP.');
+            throw new RuntimeException('Please upload a JPG, PNG, or WebP image.');
         }
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         if (!in_array($ext, ALLOWED_EXTENSIONS, true)) {
-            throw new RuntimeException('Invalid file extension.');
+            throw new RuntimeException('Unsupported file format. Please upload a JPG, PNG, or WebP image.');
         }
     }
 
@@ -79,7 +79,7 @@ class UploadService
     private function ensureDirectory(string $path): void
     {
         if (!is_dir($path) && !mkdir($path, 0755, true) && !is_dir($path)) {
-            throw new RuntimeException('Unable to create upload directory: ' . $path);
+            throw new RuntimeException('We could not prepare image uploads right now. Please try again.');
         }
     }
 

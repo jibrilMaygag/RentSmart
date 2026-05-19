@@ -20,7 +20,7 @@ include __DIR__ . '/partials/head.php';
       <div>
         <a href="<?= route('') ?>" class="text-4xl font-semibold tracking-[-0.03em]">RentSmart</a>
         <p class="mt-4 max-w-md text-lg leading-8 text-slate-200">
-          Sign in to access saved properties, landlord listings, and the rest of the live RentSmart backend experience.
+          Sign in to view saved homes, manage listings, and stay on top of your account.
         </p>
       </div>
 
@@ -28,15 +28,15 @@ include __DIR__ . '/partials/head.php';
         <div class="flex items-start gap-4">
           <span class="material-symbols-outlined rounded-2xl border border-white/15 p-3 text-secondary-container">verified_user</span>
           <div>
-            <p class="font-semibold">Secure sessions</p>
-            <p class="mt-1 text-sm leading-6 text-slate-300">Existing session and remember-me logic stay intact behind the refreshed UI.</p>
+            <p class="font-semibold">Secure access</p>
+            <p class="mt-1 text-sm leading-6 text-slate-300">Your account stays protected so you can pick up right where you left off.</p>
           </div>
         </div>
         <div class="flex items-start gap-4">
           <span class="material-symbols-outlined rounded-2xl border border-white/15 p-3 text-secondary-container">favorite</span>
           <div>
             <p class="font-semibold">Saved properties</p>
-            <p class="mt-1 text-sm leading-6 text-slate-300">Return to favorited homes and continue browsing from your dashboard.</p>
+            <p class="mt-1 text-sm leading-6 text-slate-300">Return to saved homes and continue browsing from your dashboard.</p>
           </div>
         </div>
       </div>

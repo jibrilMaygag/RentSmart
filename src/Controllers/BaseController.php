@@ -15,7 +15,6 @@ abstract class BaseController
         $this->authMiddleware = new AuthMiddleware();
         $this->csrfMiddleware = new CSRFMiddleware();
     }
-
     /**
      * Render a view
      */

@@ -52,18 +52,18 @@ include __DIR__ . '/partials/header.php';
           Your home is waiting
         </h1>
         <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-100 sm:text-xl">
-          Discover verified properties, connect with trusted landlords, and find your perfect rental in one seamless experience.
+          Discover verified properties, connect with trusted landlords, and find a place that fits your lifestyle.
         </p>
       </div>
 
       <div class="mt-12 max-w-5xl rounded-[1.5rem] border border-white/15 bg-white/92 p-3 shadow-float backdrop-blur-xl">
         <div class="app-card overflow-hidden border-none bg-transparent shadow-none">
-          <div class="border-b border-outline-variant/20 px-4 py-5 sm:px-6">
+          <div class="border-b border-outline-variant/20 bg-primary px-4 py-5 sm:px-6">
             <?php include __DIR__ . '/partials/flash.php'; ?>
             <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
               <div>
-                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Begin your search</p>
-                <h2 class="mt-2 text-2xl font-bold tracking-tight text-primary">Find properties in seconds</h2>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Begin your search</p>
+                <h2 class="mt-2 text-2xl font-bold tracking-tight text-white">Find properties in seconds</h2>
               </div>
               <div
                 class="inline-flex rounded-2xl border border-outline-variant/30 bg-surface-container-low p-1"
@@ -176,7 +176,7 @@ include __DIR__ . '/partials/header.php';
         <span class="section-eyebrow">Curated selection</span>
         <h2 class="text-3xl font-semibold tracking-tight text-primary">Featured properties</h2>
         <p class="mt-3 max-w-2xl text-base leading-7 text-on-surface-variant">
-          Live featured listings pulled directly from RentSmart. Save any property and continue the journey from your dashboard.
+          Explore standout listings handpicked to help you start your search with confidence.
         </p>
       </div>
       <a href="<?= route('search') ?>" class="btn-secondary">
@@ -199,7 +199,7 @@ include __DIR__ . '/partials/header.php';
       <span class="material-symbols-outlined text-4xl text-primary-fixed-variant">real_estate_agent</span>
       <h3 class="mt-4 text-2xl font-semibold tracking-tight text-primary">No featured properties yet</h3>
       <p class="mx-auto mt-3 max-w-xl text-base leading-7 text-on-surface-variant">
-        The backend is live and ready. Browse the full catalog or contact the team if you need help publishing the next featured listing.
+        New featured homes are on the way. Browse all listings or reach out if you need help finding the right place.
       </p>
       <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
         <a href="<?= route('search') ?>" class="btn-primary">Browse Properties</a>
@@ -216,7 +216,7 @@ include __DIR__ . '/partials/header.php';
           <span class="section-eyebrow">Popular locations</span>
           <h2 class="text-3xl font-semibold tracking-tight text-primary">Explore city by city</h2>
           <p class="mt-3 max-w-2xl text-base leading-7 text-on-surface-variant">
-            Jump into the most active markets already represented in the database.
+            Browse some of the cities renters and buyers explore most on RentSmart.
           </p>
         </div>
         <a href="<?= route('search') ?>" class="text-sm font-semibold text-primary transition hover:text-secondary">See all cities</a>
@@ -235,7 +235,7 @@ include __DIR__ . '/partials/header.php';
           <div class="absolute inset-x-0 bottom-0 p-6">
             <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Explore</p>
             <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white"><?= e($city) ?></h3>
-            <p class="mt-2 text-sm text-slate-200">View available listings and refine by type, budget, and bedrooms.</p>
+            <p class="mt-2 text-sm text-slate-200">Browse homes in this area and narrow your search by type, budget, and bedrooms.</p>
           </div>
         </a>
         <?php endforeach; ?>
@@ -260,9 +260,9 @@ include __DIR__ . '/partials/header.php';
         <span class="material-symbols-outlined inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-white">home_work</span>
         <h3 class="mt-6 text-2xl font-semibold tracking-tight text-primary">For landlords</h3>
         <div class="mt-6 space-y-5 text-sm leading-7 text-on-surface-variant">
-          <p><span class="font-semibold text-primary">01.</span> Existing landlord accounts already see their listings inside the dashboard.</p>
-          <p><span class="font-semibold text-primary">02.</span> Property pages present your pricing, amenity details, and contact information clearly.</p>
-          <p><span class="font-semibold text-primary">03.</span> Need help publishing or updating a listing? The contact flow is already connected to the backend.</p>
+          <p><span class="font-semibold text-primary">01.</span> Create and manage listings from one simple dashboard.</p>
+          <p><span class="font-semibold text-primary">02.</span> Showcase pricing, amenities, photos, and key details clearly for renters.</p>
+          <p><span class="font-semibold text-primary">03.</span> Keep track of inquiries and update availability as your listings change.</p>
         </div>
         <a href="<?= route('contact') ?>" class="btn-primary mt-8">Contact the team</a>
       </div>
@@ -275,10 +275,10 @@ include __DIR__ . '/partials/header.php';
         <div class="max-w-2xl">
           <span class="text-xs font-semibold uppercase tracking-[0.22em] text-secondary-container">RentSmart</span>
           <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-            A modern rental platform built for seamless transactions.
+            Find, list, and manage properties with confidence.
           </h2>
           <p class="mt-4 text-base leading-7 text-slate-200">
-            Experience a fully integrated marketplace where property owners and renters connect securely. Your listings, favorites, messages, and transactions all work together seamlessly on one unified platform.
+            RentSmart brings property search, saved homes, and landlord communication together in one straightforward experience.
           </p>
         </div>
         <div class="flex flex-col gap-3 sm:flex-row">

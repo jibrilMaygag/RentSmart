@@ -83,7 +83,7 @@ class LandlordController extends BaseController
             );
 
             unset($_SESSION['listing_old_input'], $_SESSION['listing_form_errors']);
-            $this->flash('success', 'Property listing created successfully.');
+            $this->flash('success', 'Your listing has been published.');
             $this->redirect('dashboard/listings');
         } catch (Throwable $e) {
             foreach ($uploadedImagePaths as $imagePath) {
@@ -160,7 +160,7 @@ class LandlordController extends BaseController
             );
 
             unset($_SESSION['listing_old_input'], $_SESSION['listing_form_errors']);
-            $this->flash('success', 'Property listing updated successfully.');
+            $this->flash('success', 'Your listing has been updated.');
             $this->redirect('dashboard/listings/' . $propertyId . '/edit');
         } catch (Throwable $e) {
             foreach ($uploadedImagePaths as $imagePath) {
@@ -203,7 +203,7 @@ class LandlordController extends BaseController
                 }
             }
 
-            $this->flash('success', 'Listing deleted successfully.');
+            $this->flash('success', 'Your listing has been removed.');
         } catch (Throwable $e) {
             $this->flash('error', $e->getMessage());
         }
@@ -253,7 +253,7 @@ class LandlordController extends BaseController
         $user = $this->user();
 
         if (!$user || $user['role'] !== 'landlord') {
-            $this->flash('error', 'You must be a landlord to access that page.');
+            $this->flash('error', 'This page is only available for landlord accounts.');
             $this->redirect('dashboard');
         }
 

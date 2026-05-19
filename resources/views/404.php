@@ -11,7 +11,7 @@ include __DIR__ . '/partials/header.php';
     <p class="text-sm font-semibold uppercase tracking-[0.24em] text-secondary">404</p>
     <h1 class="mt-4 text-4xl font-semibold tracking-tight text-primary sm:text-5xl">Page not found</h1>
     <p class="mx-auto mt-5 max-w-xl text-base leading-8 text-on-surface-variant">
-      The page you&apos;re looking for doesn&apos;t exist, or the route hasn&apos;t been connected in this PHP application.
+      The page you&apos;re looking for may have moved or no longer exists.
     </p>
     <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
       <a href="<?= route('') ?>" class="btn-primary">Go home</a>

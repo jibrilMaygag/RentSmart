@@ -11,7 +11,7 @@ class MessageController extends BaseController
         $user = $this->user();
 
         if (!$user || $user['role'] !== 'renter') {
-            $this->flash('error', 'Only renters can send property inquiries.');
+            $this->flash('error', 'Only renter accounts can send inquiries.');
             $this->redirect('dashboard');
         }
 
@@ -42,7 +42,7 @@ class MessageController extends BaseController
         $user = $this->user();
 
         if (!$user || $user['role'] !== 'renter') {
-            $this->flash('error', 'Only renters can send property inquiries.');
+            $this->flash('error', 'Only renter accounts can send inquiries.');
             $this->redirect('dashboard');
         }
 
@@ -97,7 +97,7 @@ class MessageController extends BaseController
             $this->redirect('property/' . $propertyId);
         } catch (Throwable $e) {
             error_log('Inquiry error: ' . $e->getMessage());
-            $this->flash('error', 'Unable to send your inquiry right now. Please try again.');
+            $this->flash('error', 'We could not send your message right now. Please try again.');
             $this->redirect('property/' . $propertyId . '/contact');
         }
     }
