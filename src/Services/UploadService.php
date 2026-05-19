@@ -5,41 +5,42 @@
 
 class UploadService
 {
-    private string $uploadDir;
-    private string $uploadUrl;
+    private string $uploadsRootDir;
+    private string $propertyUploadDir;
 
     public function __construct()
     {
-        $this->uploadDir = UPLOAD_DIR;
-        $this->uploadUrl = UPLOAD_URL;
-
-        if (!is_dir($this->uploadDir)) {
-            mkdir($this->uploadDir, 0755, true);
-        }
+        $this->uploadsRootDir = UPLOADS_DIR;
+        $this->propertyUploadDir = PROPERTY_UPLOAD_DIR;
+        $this->ensureDirectory($this->uploadsRootDir);
+        $this->ensureDirectory($this->propertyUploadDir);
     }
 
     /**
-     * Upload a property image. Returns filename on success, throws on failure.
+     * Upload a property image. Returns a relative image path on success.
      */
     public function uploadPropertyImage(array $file): string
     {
         $this->validateFile($file);
 
-        $ext      = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $filename = 'prop_' . uniqid('', true) . '.' . $ext;
-        $destPath = $this->uploadDir . '/' . $filename;
+        $ext = strtolower(pathinfo((string)$file['name'], PATHINFO_EXTENSION));
+        $filename = $this->generateUniqueFilename($ext);
+        $destPath = $this->propertyUploadDir . DIRECTORY_SEPARATOR . $filename;
 
         if (!move_uploaded_file($file['tmp_name'], $destPath)) {
             throw new RuntimeException('Failed to move uploaded file.');
         }
 
-        return $filename;
+        return PROPERTY_UPLOADS_SUBDIR . '/' . $filename;
     }
 
     private function validateFile(array $file): void
     {
         if ($file['error'] !== UPLOAD_ERR_OK) {
             throw new RuntimeException('Upload error code: ' . $file['error']);
+        }
+        if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+            throw new RuntimeException('Invalid upload source.');
         }
         if ($file['size'] > MAX_FILE_SIZE) {
             throw new RuntimeException('File exceeds maximum allowed size (' . formatBytes(MAX_FILE_SIZE) . ').');
@@ -55,17 +56,61 @@ class UploadService
         }
     }
 
-    public function delete(string $filename): bool
+    public function delete(string $imagePath): bool
     {
-        $path = $this->uploadDir . '/' . basename($filename);
-        if (file_exists($path)) {
-            return unlink($path);
+        $resolvedPath = $this->resolveManagedImagePath($imagePath);
+        if (!$resolvedPath || !file_exists($resolvedPath)) {
+            return false;
         }
-        return false;
+
+        return unlink($resolvedPath);
     }
 
-    public function getUrl(string $filename): string
+    public function getUrl(string $imagePath): string
     {
-        return $this->uploadUrl . '/' . rawurlencode($filename);
+        return imageUrl($imagePath);
+    }
+
+    public function isManagedPropertyImage(string $imagePath): bool
+    {
+        return $this->resolveManagedImagePath($imagePath) !== null;
+    }
+
+    private function ensureDirectory(string $path): void
+    {
+        if (!is_dir($path) && !mkdir($path, 0755, true) && !is_dir($path)) {
+            throw new RuntimeException('Unable to create upload directory: ' . $path);
+        }
+    }
+
+    private function generateUniqueFilename(string $extension): string
+    {
+        try {
+            $random = bin2hex(random_bytes(16));
+        } catch (Throwable $e) {
+            $random = str_replace('.', '', uniqid('', true));
+        }
+
+        return 'prop_' . $random . '.' . $extension;
+    }
+
+    private function resolveManagedImagePath(string $imagePath): string|null
+    {
+        $normalized = ltrim(str_replace('\\', '/', trim($imagePath)), '/');
+        if ($normalized === '') {
+            return null;
+        }
+
+        if (str_starts_with($normalized, PROPERTY_UPLOADS_SUBDIR . '/')) {
+            return APP_ROOT . '/' . $normalized;
+        }
+
+        if ((str_starts_with($normalized, 'prop_') || str_starts_with($normalized, 'upload_'))
+            && str_contains($normalized, '/') === false
+        ) {
+            return LEGACY_UPLOAD_DIR . '/' . basename($normalized);
+        }
+
+        return null;
     }
 }

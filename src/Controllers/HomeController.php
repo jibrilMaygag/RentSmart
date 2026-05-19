@@ -58,6 +58,7 @@ class HomeController extends BaseController
         }
 
         $propertyModel->incrementViews($id);
+        $property['views'] = (int)($property['views'] ?? 0) + 1;
 
         // Check if current user has favorited this property
         $isFavorited = false;
@@ -97,13 +98,45 @@ class HomeController extends BaseController
         ]);
     }
 
+    public function favoritesPage(): void
+    {
+        $this->requireAuth();
+        $user = $this->user();
+
+        if (!$user || $user['role'] !== 'renter') {
+            $this->flash('error', 'Only renters can access saved properties.');
+            $this->redirect('dashboard');
+        }
+
+        $propertyModel = new Property();
+        $favorites = $propertyModel->getUserFavorites($user['id']);
+
+        $this->view('renter/favorites', [
+            'user' => $user,
+            'favorites' => $favorites,
+        ]);
+    }
+
     public function showContact(): void
     {
-        $this->view('contact', ['user' => $this->user()]);
+        $old = $_SESSION['contact_old_input'] ?? [];
+        unset($_SESSION['contact_old_input']);
+
+        $this->view('contact', [
+            'user' => $this->user(),
+            'old'  => $old,
+        ]);
     }
 
     public function submitContact(): void
     {
+        $_SESSION['contact_old_input'] = [
+            'name'    => trim($_POST['name'] ?? ''),
+            'email'   => trim($_POST['email'] ?? ''),
+            'phone'   => trim($_POST['phone'] ?? ''),
+            'message' => trim($_POST['message'] ?? ''),
+        ];
+
         $validator = new Validator($_POST);
         $validator->required('name',    'Name')
                   ->required('email',   'Email')
@@ -127,6 +160,7 @@ class HomeController extends BaseController
                     $validator->get('message'),
                 ]
             );
+            unset($_SESSION['contact_old_input']);
             $this->flash('success', 'Your message has been sent! We\'ll be in touch soon.');
         } catch (Exception $e) {
             $this->flash('error', 'Failed to send message. Please try again.');

@@ -1,168 +1,175 @@
 <?php
 /**
- * @var array      $user         Current user
- * @var array      $myProperties Landlord properties
- * @var array      $favorites    User favorites (renters)
+ * @var array $user
+ * @var array $myProperties
+ * @var array $favorites
  */
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+$isLandlord = ($user['role'] ?? 'renter') === 'landlord';
+$pageTitle = $isLandlord ? 'Landlord Dashboard | RentSmart' : 'Renter Dashboard | RentSmart';
+$pageHeading = $isLandlord ? 'Landlord Dashboard' : 'Renter Dashboard';
+$pageSubheading = $isLandlord
+    ? 'Review your live listings and stay connected to property activity.'
+    : 'Keep track of saved homes and continue your search with confidence.';
+$bodyClass = 'dashboard-shell';
+$layoutMode = 'dashboard';
+$dashboardSection = 'overview';
+$primaryItems = $isLandlord ? $myProperties : $favorites;
+$primarySectionId = $isLandlord ? 'my-listings' : 'saved-properties';
+$primarySectionTitle = $isLandlord ? 'My Listings' : 'Saved Properties';
+$primarySectionDescription = $isLandlord
+    ? 'These cards are rendering your current landlord listings from the existing backend.'
+    : 'These are the properties you have already saved using the existing favorites endpoint.';
+
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/partials/sidebar.php';
+include __DIR__ . '/partials/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard | RentSmart</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css" />
-</head>
-<body>
+<main class="app-container py-8 pb-28 lg:pb-12">
+  <?php include __DIR__ . '/partials/flash.php'; ?>
 
-<?php include __DIR__ . '/partials/navbar.php'; ?>
+  <section class="grid gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.9fr)]">
+    <div class="space-y-6">
+      <div class="dashboard-panel overflow-hidden p-8">
+        <div class="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Welcome back</p>
+            <h2 class="mt-3 text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
+              <?= $isLandlord ? 'Manage your portfolio, ' : 'Welcome home, ' ?><?= e(userFirstName($user)) ?>.
+            </h2>
+            <p class="mt-4 max-w-2xl text-base leading-7 text-on-surface-variant">
+              <?= $isLandlord
+                ? 'Your dashboard is connected to the same listings, property pages, and contact workflows already running in RentSmart.'
+                : 'Your dashboard is connected to the same saved properties, detail pages, and search results already powered by RentSmart.' ?>
+            </p>
+          </div>
 
-<div class="container" style="padding-top:2.5rem;padding-bottom:4rem;">
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a href="<?= route('search') ?>" class="btn-primary">Browse Properties</a>
+            <a href="<?= $isLandlord ? route('dashboard/listings/create') : route('favorites') ?>" class="btn-secondary">
+              <?= e($isLandlord ? 'Post Listing' : 'Open Saved') ?>
+            </a>
+          </div>
+        </div>
 
-  <!-- Flash -->
-  <?php if ($success = flash('success')): ?>
-  <div class="alert-banner alert-success"><i class="fas fa-check-circle"></i> <?= e($success) ?>
-    <button class="alert-close" onclick="this.parentElement.remove()">×</button></div>
-  <?php endif; ?>
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          <div class="rounded-[1.5rem] bg-surface-container-low p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant">Role</p>
+            <p class="mt-3 text-2xl font-semibold tracking-tight text-primary"><?= e(ucfirst($user['role'] ?? 'member')) ?></p>
+          </div>
+          <div class="rounded-[1.5rem] bg-surface-container-low p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant"><?= e($primarySectionTitle) ?></p>
+            <p class="mt-3 text-2xl font-semibold tracking-tight text-primary"><?= number_format(count($primaryItems)) ?></p>
+          </div>
+          <div class="rounded-[1.5rem] bg-surface-container-low p-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant">Account email</p>
+            <p class="mt-3 truncate text-lg font-semibold tracking-tight text-primary"><?= e($user['email'] ?? '') ?></p>
+          </div>
+        </div>
+      </div>
 
-  <!-- Profile Header -->
-  <div style="display:flex;align-items:center;gap:1.25rem;margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid #e2e8f0;">
-    <div style="width:64px;height:64px;border-radius:50%;background:#2563eb;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.6rem;flex-shrink:0;">
-      <i class="fas fa-user"></i>
-    </div>
-    <div>
-      <h1 style="margin:0;font-size:1.6rem;">Welcome, <?= e(explode(' ', $user['full_name'])[0]) ?></h1>
-      <p style="margin:0;color:#64748b;"><?= e($user['email']) ?> &nbsp;·&nbsp; <?= ucfirst($user['role']) ?></p>
-    </div>
-    <div style="margin-left:auto;">
-      <a href="<?= APP_URL ?>/logout" class="btn-outline" style="color:#ef4444;border-color:#ef4444;">
-        <i class="fas fa-sign-out-alt" style="margin-right:0.4rem;"></i>Logout
-      </a>
-    </div>
-  </div>
-
-  <!-- Quick Actions -->
-  <div class="properties-grid" style="margin-bottom:2.5rem;">
-
-    <div class="property-card" style="padding:1.5rem;text-align:center;">
-      <i class="fas fa-search fa-2x" style="color:#2563eb;margin-bottom:0.75rem;display:block;"></i>
-      <h3 style="margin-bottom:0.5rem;">Browse Properties</h3>
-      <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;">Find your next home.</p>
-      <a href="<?= APP_URL ?>/search" class="btn-primary">Search Now</a>
-    </div>
-
-    <?php if ($user['role'] === 'landlord'): ?>
-    <div class="property-card" style="padding:1.5rem;text-align:center;">
-      <i class="fas fa-building fa-2x" style="color:#2563eb;margin-bottom:0.75rem;display:block;"></i>
-      <h3 style="margin-bottom:0.5rem;">My Listings</h3>
-      <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;"><?= count($myProperties) ?> active listing<?= count($myProperties) !== 1 ? 's' : '' ?>.</p>
-      <a href="#my-listings" class="btn-primary">View All</a>
-    </div>
-    <?php else: ?>
-    <div class="property-card" style="padding:1.5rem;text-align:center;">
-      <i class="fas fa-heart fa-2x" style="color:#ef4444;margin-bottom:0.75rem;display:block;"></i>
-      <h3 style="margin-bottom:0.5rem;">Saved Properties</h3>
-      <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;"><?= count($favorites) ?> saved property<?= count($favorites) !== 1 ? 'ies' : '' ?>.</p>
-      <a href="#favorites" class="btn-primary">View Saved</a>
-    </div>
-    <?php endif; ?>
-
-    <div class="property-card" style="padding:1.5rem;text-align:center;">
-      <i class="fas fa-envelope fa-2x" style="color:#2563eb;margin-bottom:0.75rem;display:block;"></i>
-      <h3 style="margin-bottom:0.5rem;">Contact Support</h3>
-      <p style="color:#64748b;font-size:0.9rem;margin-bottom:1rem;">We're here to help.</p>
-      <a href="<?= APP_URL ?>/contact" class="btn-outline">Get Help</a>
-    </div>
-
-  </div>
-
-  <!-- Landlord: My Properties -->
-  <?php if ($user['role'] === 'landlord'): ?>
-  <div id="my-listings">
-    <h2 style="margin-bottom:1.25rem;">My Properties</h2>
-    <?php if (!empty($myProperties)): ?>
-    <div class="properties-grid">
-      <?php foreach ($myProperties as $p):
-        $imgSrc = imageUrl($p['image_filename'] ?? DEFAULT_PROPERTY_IMG);
-      ?>
-      <a href="<?= APP_URL ?>/property/<?= (int)$p['id'] ?>" class="property-card">
-        <div class="property-image">
-          <img src="<?= $imgSrc ?>" alt="<?= e($p['title']) ?>" loading="lazy" />
-          <span class="property-badge <?= $p['status'] === 'available' ? 'new' : '' ?>">
-            <?= ucfirst($p['status']) ?>
+      <div id="<?= e($primarySectionId) ?>" class="dashboard-panel p-8">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <h3 class="text-2xl font-semibold tracking-tight text-primary"><?= e($primarySectionTitle) ?></h3>
+            <p class="mt-2 text-sm leading-6 text-on-surface-variant"><?= e($primarySectionDescription) ?></p>
+          </div>
+          <?php if (!$isLandlord && !empty($favorites)): ?>
+          <span class="inline-flex items-center rounded-full bg-secondary-container px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-on-secondary-container">
+            Click the heart to remove saved items
           </span>
+          <?php endif; ?>
         </div>
-        <div class="property-content">
-          <div class="property-price">
-            <span class="price"><?= number_format($p['price']) ?> ETB</span>
-            <?php if ($p['listing_type'] === 'rent'): ?><span class="period">/ mo</span><?php endif; ?>
-          </div>
-          <h3 class="property-title"><?= e($p['title']) ?></h3>
-          <p class="property-location"><i class="fas fa-map-marker-alt" style="font-size:0.8rem;"></i> <?= e($p['city']) ?></p>
-          <div class="property-features">
-            <span><?= (int)$p['bedrooms'] ?> Beds</span>
-            <span><?= (int)$p['bathrooms'] ?> Baths</span>
-          </div>
-        </div>
-      </a>
-      <?php endforeach; ?>
-    </div>
-    <?php else: ?>
-    <div style="text-align:center;padding:3rem;color:#64748b;border:1px dashed #e2e8f0;border-radius:12px;">
-      <i class="fas fa-home" style="font-size:2.5rem;margin-bottom:0.75rem;opacity:0.3;display:block;"></i>
-      <p>You haven't listed any properties yet.</p>
-      <a href="<?= APP_URL ?>/contact" class="btn-primary" style="margin-top:0.75rem;">Contact us to list</a>
-    </div>
-    <?php endif; ?>
-  </div>
-  <?php endif; ?>
 
-  <!-- Renter: Favorites -->
-  <?php if ($user['role'] === 'renter'): ?>
-  <div id="favorites">
-    <h2 style="margin-bottom:1.25rem;">Saved Properties</h2>
-    <?php if (!empty($favorites)): ?>
-    <div class="properties-grid">
-      <?php foreach ($favorites as $p):
-        $imgSrc = imageUrl($p['image_filename'] ?? DEFAULT_PROPERTY_IMG);
-      ?>
-      <a href="<?= APP_URL ?>/property/<?= (int)$p['id'] ?>" class="property-card">
-        <div class="property-image">
-          <img src="<?= $imgSrc ?>" alt="<?= e($p['title']) ?>" loading="lazy" />
+        <?php if (!empty($primaryItems)): ?>
+        <div class="property-grid mt-8">
+          <?php foreach ($primaryItems as $property): ?>
+            <?php
+            $showFavoriteButton = !$isLandlord;
+            $isFavorite = !$isLandlord;
+            $removeOnUnfavorite = !$isLandlord;
+            $showDetailsCta = true;
+            $badgeLabel = $isLandlord ? ucfirst($property['status'] ?? 'Available') : '';
+            include __DIR__ . '/partials/property-card.php';
+            ?>
+          <?php endforeach; ?>
         </div>
-        <div class="property-content">
-          <div class="property-price">
-            <span class="price"><?= number_format($p['price']) ?> ETB</span>
-            <?php if ($p['listing_type'] === 'rent'): ?><span class="period">/ mo</span><?php endif; ?>
-          </div>
-          <h3 class="property-title"><?= e($p['title']) ?></h3>
-          <p class="property-location"><i class="fas fa-map-marker-alt" style="font-size:0.8rem;"></i> <?= e($p['city']) ?></p>
-          <div class="property-features">
-            <span><?= (int)$p['bedrooms'] ?> Beds</span>
-            <span><?= (int)$p['bathrooms'] ?> Baths</span>
+        <?php else: ?>
+        <div class="mt-8 rounded-[1.5rem] border border-dashed border-outline-variant/40 bg-surface-container-low px-6 py-10 text-center">
+          <span class="material-symbols-outlined text-5xl text-primary-fixed-variant"><?= $isLandlord ? 'home_work' : 'favorite' ?></span>
+          <h4 class="mt-4 text-2xl font-semibold tracking-tight text-primary">
+            <?= $isLandlord ? 'No listings yet' : 'No saved properties yet' ?>
+          </h4>
+          <p class="mx-auto mt-3 max-w-xl text-base leading-7 text-on-surface-variant">
+            <?= $isLandlord
+              ? 'Your landlord dashboard is ready, but there are no active listings tied to this account yet. Use the contact flow if you need help publishing one.'
+              : 'Save a property from the browse or detail pages and it will appear here immediately through the existing favorites backend.' ?>
+          </p>
+          <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+            <a href="<?= route('search') ?>" class="btn-primary"><?= $isLandlord ? 'Browse marketplace' : 'Browse properties' ?></a>
+            <a href="<?= route('contact') ?>" class="btn-secondary">Contact support</a>
           </div>
         </div>
-      </a>
-      <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
     </div>
-    <?php else: ?>
-    <div style="text-align:center;padding:3rem;color:#64748b;border:1px dashed #e2e8f0;border-radius:12px;">
-      <i class="fas fa-heart" style="font-size:2.5rem;margin-bottom:0.75rem;opacity:0.3;display:block;"></i>
-      <p>You haven't saved any properties yet.</p>
-      <a href="<?= APP_URL ?>/search" class="btn-primary" style="margin-top:0.75rem;">Browse Properties</a>
-    </div>
-    <?php endif; ?>
-  </div>
-  <?php endif; ?>
 
-</div>
+    <aside class="space-y-6">
+      <div class="dashboard-panel p-7">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Account snapshot</p>
+        <div class="mt-5 flex items-center gap-4">
+          <div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-lg font-semibold text-white">
+            <?= e(strtoupper(substr(userFirstName($user), 0, 1))) ?>
+          </div>
+          <div class="min-w-0">
+            <p class="truncate text-lg font-semibold tracking-tight text-primary"><?= e($user['full_name'] ?? '') ?></p>
+            <p class="truncate text-sm text-on-surface-variant"><?= e($user['email'] ?? '') ?></p>
+          </div>
+        </div>
+        <div class="mt-6 space-y-4 text-sm leading-6 text-on-surface-variant">
+          <p><?= $isLandlord ? 'You can review your listings and open each public property page from here.' : 'You can revisit saved homes and continue exploring from the search page.' ?></p>
+          <p>Authentication, sessions, and dashboard routing are still powered by the existing backend.</p>
+        </div>
+      </div>
 
-<?php include __DIR__ . '/partials/footer.php'; ?>
-<script src="<?= APP_URL ?>/assets/javascript/script.js"></script>
-</body>
-</html>
+      <div class="dashboard-panel p-7">
+        <h3 class="text-xl font-semibold tracking-tight text-primary">Quick actions</h3>
+        <div class="mt-5 space-y-3">
+          <a href="<?= route('search') ?>" class="dashboard-nav-link bg-surface-container-low">
+            <span class="material-symbols-outlined">search</span>
+            <span>Browse Properties</span>
+          </a>
+          <a href="<?= $isLandlord ? route('dashboard/listings') : route('favorites') ?>" class="dashboard-nav-link bg-surface-container-low">
+            <span class="material-symbols-outlined"><?= e($isLandlord ? 'home_work' : 'favorite') ?></span>
+            <span><?= e($isLandlord ? 'Manage Listings' : 'Saved Properties') ?></span>
+          </a>
+          <?php if ($isLandlord): ?>
+          <a href="<?= route('dashboard/messages') ?>" class="dashboard-nav-link bg-surface-container-low">
+            <span class="material-symbols-outlined">mail</span>
+            <span>Open Inbox</span>
+          </a>
+          <?php endif; ?>
+          <a href="<?= route('contact') ?>" class="dashboard-nav-link bg-surface-container-low">
+            <span class="material-symbols-outlined">support_agent</span>
+            <span>Contact Support</span>
+          </a>
+          <a href="<?= route('logout') ?>" class="dashboard-nav-link bg-surface-container-low">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-[1.75rem] bg-primary p-7 text-white shadow-float">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Unified application</p>
+        <h3 class="mt-4 text-2xl font-semibold tracking-tight">One platform, consistent experience.</h3>
+        <p class="mt-4 text-sm leading-7 text-slate-200">
+          Your dashboard integrates with every part of the RentSmart platform, giving you a professional, cohesive experience across all features and workflows.
+        </p>
+      </div>
+    </aside>
+  </section>
+</main>
+<?php
+$footerMode = 'none';
+include __DIR__ . '/partials/footer.php';
+?>

@@ -1,115 +1,131 @@
 <?php
-// Generate CSRF token if needed
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+/**
+ * @var array $old
+ */
+$pageTitle = 'Login | RentSmart';
+$bodyClass = 'min-h-screen bg-background';
+$old = $old ?? [];
+
+include __DIR__ . '/partials/head.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login | RentSmart</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css" />
-</head>
-<body>
-  <div class="auth-page">
-    <div class="split-layout">
-      <!-- Left: Form -->
-      <div class="auth-left">
-        <div class="logo">
-          <a href="<?= APP_URL ?>"><h2>RentSmart</h2></a>
-        </div>
-        <h1>Welcome back</h1>
-        <p class="auth-subtitle">Welcome back! Please enter your details.</p>
-
-        <?php if ($error = flash('error')): ?>
-        <div class="form-alert form-alert-danger">
-          <i class="fas fa-exclamation-circle"></i> <?= e($error) ?>
-        </div>
-        <?php endif; ?>
-
-        <?php if ($success = flash('success')): ?>
-        <div class="form-alert form-alert-success">
-          <i class="fas fa-check-circle"></i> <?= e($success) ?>
-        </div>
-        <?php endif; ?>
-
-        <form method="POST" action="<?= APP_URL ?>/login" id="loginForm" novalidate>
-          <input type="hidden" name="csrf_token" value="<?= e($_SESSION['csrf_token']) ?>" />
-
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email"
-                   value="<?= e($_POST['email'] ?? '') ?>" required autocomplete="email" />
-            <span class="field-error" id="emailError"></span>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <div class="input-icon-right">
-              <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password" />
-              <button type="button" class="toggle-pw" tabindex="-1" aria-label="Show password">
-                <i class="fas fa-eye"></i>
-              </button>
-            </div>
-            <span class="field-error" id="passwordError"></span>
-          </div>
-
-          <div class="form-options">
-            <label style="display:flex;gap:0.5rem;align-items:center;cursor:pointer;">
-              <input type="checkbox" name="remember" style="width:auto;" /> Remember me
-            </label>
-            <a href="#">Forgot password?</a>
-          </div>
-
-          <button type="submit" class="btn-primary btn-block" id="loginBtn">Sign In</button>
-        </form>
-
-        <div class="divider">
-          <span>Don't have an account? <a href="<?= APP_URL ?>/signup" style="color:#2563eb;">Sign up for free</a></span>
-        </div>
+<main class="grid min-h-screen lg:grid-cols-2">
+  <section class="relative hidden overflow-hidden bg-primary lg:block">
+    <img
+      src="<?= e(imageUrl('pexels-photo-164558.jpeg')) ?>"
+      alt="RentSmart architecture background"
+      class="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/25 to-slate-950/5"></div>
+    <div class="relative z-10 flex h-full flex-col justify-between p-10 text-white xl:p-14">
+      <div>
+        <a href="<?= route('') ?>" class="text-4xl font-semibold tracking-[-0.03em]">RentSmart</a>
+        <p class="mt-4 max-w-md text-lg leading-8 text-slate-200">
+          Sign in to access saved properties, landlord listings, and the rest of the live RentSmart backend experience.
+        </p>
       </div>
 
-      <!-- Right: Image -->
-      <div class="auth-right">
-        <div class="overlay"></div>
+      <div class="space-y-6">
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined rounded-2xl border border-white/15 p-3 text-secondary-container">verified_user</span>
+          <div>
+            <p class="font-semibold">Secure sessions</p>
+            <p class="mt-1 text-sm leading-6 text-slate-300">Existing session and remember-me logic stay intact behind the refreshed UI.</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-4">
+          <span class="material-symbols-outlined rounded-2xl border border-white/15 p-3 text-secondary-container">favorite</span>
+          <div>
+            <p class="font-semibold">Saved properties</p>
+            <p class="mt-1 text-sm leading-6 text-slate-300">Return to favorited homes and continue browsing from your dashboard.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <script>
-  // Client-side validation
-  const form = document.getElementById('loginForm');
-  form.addEventListener('submit', e => {
-    let ok = true;
-    const email = document.getElementById('email');
-    const pw    = document.getElementById('password');
-    document.getElementById('emailError').textContent    = '';
-    document.getElementById('passwordError').textContent = '';
+  <section class="flex min-h-screen items-center justify-center px-5 py-10 sm:px-8">
+    <div class="w-full max-w-[460px]">
+      <a href="<?= route('') ?>" class="text-3xl font-semibold tracking-[-0.03em] text-primary lg:hidden">RentSmart</a>
 
-    if (!email.value.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
-      document.getElementById('emailError').textContent = 'Please enter a valid email.';
-      ok = false;
-    }
-    if (!pw.value) {
-      document.getElementById('passwordError').textContent = 'Password is required.';
-      ok = false;
-    }
-    if (!ok) { e.preventDefault(); return; }
-    document.getElementById('loginBtn').textContent = 'Signing in…';
-    document.getElementById('loginBtn').disabled = true;
-  });
+      <div class="mt-10">
+        <h1 class="text-3xl font-semibold tracking-tight text-primary">Welcome back</h1>
+        <p class="mt-3 text-base leading-7 text-on-surface-variant">
+          Enter your details to access your renter or landlord dashboard.
+        </p>
+      </div>
 
-  // Toggle password visibility
-  document.querySelector('.toggle-pw').addEventListener('click', () => {
-    const pw = document.getElementById('password');
-    const ic = document.querySelector('.toggle-pw i');
-    if (pw.type === 'password') { pw.type = 'text'; ic.classList.replace('fa-eye','fa-eye-slash'); }
-    else                        { pw.type = 'password'; ic.classList.replace('fa-eye-slash','fa-eye'); }
-  });
-  </script>
-</body>
-</html>
+      <div class="mt-8">
+        <?php include __DIR__ . '/partials/flash.php'; ?>
+      </div>
+
+      <form action="<?= route('login') ?>" method="POST" class="mt-6 space-y-5">
+        <?= csrfField() ?>
+
+        <div>
+          <label for="loginEmail" class="field-label">Email address</label>
+          <input
+            id="loginEmail"
+            name="email"
+            type="email"
+            class="field-input"
+            value="<?= e($old['email'] ?? '') ?>"
+            placeholder="name@example.com"
+            autocomplete="email"
+            required
+          />
+        </div>
+
+        <div>
+          <div class="mb-2 flex items-center justify-between">
+            <label for="loginPassword" class="text-sm font-medium text-on-surface-variant">Password</label>
+            <span class="text-xs font-medium uppercase tracking-[0.18em] text-secondary">Secure sign-in</span>
+          </div>
+          <div class="relative">
+            <input
+              id="loginPassword"
+              name="password"
+              type="password"
+              class="field-input pr-12"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            />
+            <button
+              type="button"
+              class="absolute inset-y-0 right-3 inline-flex items-center text-on-surface-variant transition hover:text-primary"
+              data-password-toggle="loginPassword"
+              aria-label="Toggle password visibility"
+            >
+              <span class="material-symbols-outlined text-[20px]">visibility</span>
+            </button>
+          </div>
+        </div>
+
+        <label class="flex items-center gap-3 rounded-2xl bg-surface-container-low px-4 py-4 text-sm text-on-surface-variant">
+          <input
+            type="checkbox"
+            name="remember"
+            value="1"
+            class="h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary"
+            <?= !empty($old['remember']) ? 'checked' : '' ?>
+          />
+          <span>Keep me signed in on this device</span>
+        </label>
+
+        <button type="submit" class="btn-primary w-full justify-center">
+          <span>Sign in</span>
+          <span class="material-symbols-outlined text-base">arrow_forward</span>
+        </button>
+      </form>
+
+      <p class="mt-8 text-center text-sm text-on-surface-variant">
+        Don&apos;t have an account?
+        <a href="<?= route('signup') ?>" class="font-semibold text-secondary transition hover:text-primary">Create one</a>
+      </p>
+    </div>
+  </section>
+</main>
+<?php
+$footerMode = 'minimal';
+include __DIR__ . '/partials/footer.php';
+?>

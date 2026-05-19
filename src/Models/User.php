@@ -43,7 +43,11 @@ class User extends BaseModel
     public function getLandlordProperties(int $landlordId): array
     {
         return $this->db->query(
-            'SELECT * FROM properties WHERE landlord_id = ? ORDER BY created_at DESC',
+            'SELECT p.*, pi.image_path AS image_path
+             FROM properties p
+             LEFT JOIN property_images pi ON pi.property_id = p.id AND pi.is_primary = 1
+             WHERE p.landlord_id = ?
+             ORDER BY p.created_at DESC',
             [$landlordId]
         )->fetchAll();
     }

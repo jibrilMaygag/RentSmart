@@ -24,6 +24,36 @@ $csrf->handle();
 // ── Route Dispatch ─────────────────────────────────────────────────────────────
 $home = new HomeController();
 $auth = new AuthController();
+$landlord = new LandlordController();
+$messages = new MessageController();
+
+// Match /property/{id}/contact
+if (preg_match('#^/property/(\d+)/contact$#', $path, $m)) {
+    ($method === 'POST')
+        ? $messages->sendInquiry((int)$m[1])
+        : $messages->showContactLandlord((int)$m[1]);
+    exit;
+}
+
+// Match /dashboard/listings/{id}/edit
+if (preg_match('#^/dashboard/listings/(\d+)/edit$#', $path, $m)) {
+    ($method === 'POST')
+        ? $landlord->updateListing((int)$m[1])
+        : $landlord->showEditListing((int)$m[1]);
+    exit;
+}
+
+// Match /dashboard/listings/{id}/delete
+if (preg_match('#^/dashboard/listings/(\d+)/delete$#', $path, $m) && $method === 'POST') {
+    $landlord->deleteListing((int)$m[1]);
+    exit;
+}
+
+// Match /dashboard/listings/{id}/status
+if (preg_match('#^/dashboard/listings/(\d+)/status$#', $path, $m) && $method === 'POST') {
+    $landlord->updateListingStatus((int)$m[1]);
+    exit;
+}
 
 // Match /property/{id}
 if (preg_match('#^/property/(\d+)$#', $path, $m)) {
@@ -61,6 +91,22 @@ switch ($path) {
 
     case '/dashboard':
         $home->dashboard();
+        break;
+
+    case '/dashboard/listings':
+        $landlord->listings();
+        break;
+
+    case '/dashboard/listings/create':
+        ($method === 'POST') ? $landlord->createListing() : $landlord->showCreateListing();
+        break;
+
+    case '/dashboard/messages':
+        $landlord->messages();
+        break;
+
+    case '/favorites':
+        $home->favoritesPage();
         break;
 
     case '/contact':

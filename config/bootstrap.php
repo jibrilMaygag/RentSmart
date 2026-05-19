@@ -27,6 +27,7 @@ require_once APP_ROOT . '/config/database.php';
 require_once APP_ROOT . '/src/Models/BaseModel.php';
 require_once APP_ROOT . '/src/Models/User.php';
 require_once APP_ROOT . '/src/Models/Property.php';
+require_once APP_ROOT . '/src/Models/Message.php';
 
 // Load services
 require_once APP_ROOT . '/src/Services/AuthService.php';
@@ -44,6 +45,8 @@ require_once APP_ROOT . '/src/Helpers/functions.php';
 require_once APP_ROOT . '/src/Controllers/BaseController.php';
 require_once APP_ROOT . '/src/Controllers/HomeController.php';
 require_once APP_ROOT . '/src/Controllers/AuthController.php';
+require_once APP_ROOT . '/src/Controllers/LandlordController.php';
+require_once APP_ROOT . '/src/Controllers/MessageController.php';
 
 // Start session
 AuthService::startSession();

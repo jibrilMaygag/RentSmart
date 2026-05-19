@@ -80,8 +80,8 @@ if ($count === 0) {
         $propId = (int)$db->lastInsertId();
 
         // Primary image
-        $db->prepare('INSERT INTO property_images (property_id,filename,is_primary,sort_order) VALUES (?,?,1,0)')
-           ->execute([$propId, $p[11]]);
+        $db->prepare('INSERT INTO property_images (property_id,image_path,is_primary,sort_order) VALUES (?,?,1,0)')
+           ->execute([$propId, 'assets/media/img/' . $p[11]]);
 
         // Attach 2-3 amenities
         $amenityIds = array_slice([1,2,3,4,5,6,7,8,9,10], $idx % 5, 3);

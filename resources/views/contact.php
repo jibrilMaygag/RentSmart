@@ -1,130 +1,133 @@
 <?php
-if (empty($_SESSION['csrf_token'])) {
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
+/**
+ * @var array|null $user
+ * @var array      $old
+ */
+$pageTitle = 'Contact Us | RentSmart';
+$bodyClass = 'app-shell';
+$old = $old ?? [];
+
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/partials/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us | RentSmart</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css" />
-</head>
-<body>
+<main class="app-container pb-16 pt-24 sm:pt-28">
+  <section class="rounded-[2rem] border border-outline-variant/20 bg-surface-container-low px-6 py-10 sm:px-8">
+    <span class="section-eyebrow">Support</span>
+    <h1 class="text-3xl font-semibold tracking-tight text-primary sm:text-4xl">Contact the RentSmart team</h1>
+    <p class="mt-4 max-w-2xl text-base leading-7 text-on-surface-variant">
+      The backend contact flow is already wired in. Send a message for account help, listing support, or any property-related question.
+    </p>
+  </section>
 
-<?php include __DIR__ . '/partials/navbar.php'; ?>
+  <section class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(320px,0.85fr)]">
+    <div class="app-card p-7 sm:p-8">
+      <?php include __DIR__ . '/partials/flash.php'; ?>
 
-<!-- Flash -->
-<?php if ($success = flash('success')): ?>
-<div class="alert-banner alert-success"><i class="fas fa-check-circle"></i> <?= e($success) ?>
-  <button class="alert-close" onclick="this.parentElement.remove()">×</button></div>
-<?php endif; ?>
-<?php if ($error = flash('error')): ?>
-<div class="alert-banner alert-danger"><i class="fas fa-exclamation-circle"></i> <?= e($error) ?>
-  <button class="alert-close" onclick="this.parentElement.remove()">×</button></div>
-<?php endif; ?>
+      <form action="<?= route('contact') ?>" method="POST" class="space-y-5">
+        <?= csrfField() ?>
 
-<section class="contact-section">
-  <div class="container">
-    <div class="section-header">
-      <h2>Contact Us</h2>
-      <p>We'd love to hear from you. Send us a message and we'll respond shortly.</p>
+        <div class="grid gap-5 md:grid-cols-2">
+          <div>
+            <label for="contactName" class="field-label">Full name</label>
+            <input
+              id="contactName"
+              name="name"
+              class="field-input"
+              value="<?= e($old['name'] ?? $user['full_name'] ?? '') ?>"
+              placeholder="Your full name"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="contactEmail" class="field-label">Email</label>
+            <input
+              id="contactEmail"
+              name="email"
+              type="email"
+              class="field-input"
+              value="<?= e($old['email'] ?? $user['email'] ?? '') ?>"
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="contactPhone" class="field-label">Phone</label>
+          <input
+            id="contactPhone"
+            name="phone"
+            class="field-input"
+            value="<?= e($old['phone'] ?? '') ?>"
+            placeholder="+251 900 000 000"
+          />
+        </div>
+
+        <div>
+          <label for="contactMessage" class="field-label">Message</label>
+          <textarea
+            id="contactMessage"
+            name="message"
+            rows="7"
+            class="field-input min-h-[180px] resize-y"
+            placeholder="Tell us how we can help"
+            required
+          ><?= e($old['message'] ?? '') ?></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary">
+          <span class="material-symbols-outlined text-base">send</span>
+          <span>Send message</span>
+        </button>
+      </form>
     </div>
 
-    <div class="contact-grid">
-      <!-- Form -->
-      <div class="contact-form-wrapper">
-        <?php if ($errors = flash('errors')): ?>
-        <div class="form-alert form-alert-danger">
-          <ul style="margin:0;padding-left:1.25rem;">
-            <?php foreach ($errors as $fieldErrors): ?>
-              <?php foreach ($fieldErrors as $err): ?>
-              <li><?= e($err) ?></li>
-              <?php endforeach; ?>
-            <?php endforeach; ?>
-          </ul>
+    <aside class="space-y-6">
+      <div class="app-card p-7">
+        <h2 class="text-2xl font-semibold tracking-tight text-primary">Get in touch</h2>
+        <div class="mt-6 space-y-5">
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined rounded-2xl bg-surface-container-low p-3 text-primary">mail</span>
+            <div>
+              <p class="text-sm font-semibold text-primary">Email</p>
+              <p class="mt-1 text-sm text-on-surface-variant">info@rentsmart.com</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined rounded-2xl bg-surface-container-low p-3 text-primary">call</span>
+            <div>
+              <p class="text-sm font-semibold text-primary">Phone</p>
+              <p class="mt-1 text-sm text-on-surface-variant">+251 900 000 000</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-4">
+            <span class="material-symbols-outlined rounded-2xl bg-surface-container-low p-3 text-primary">location_on</span>
+            <div>
+              <p class="text-sm font-semibold text-primary">Office</p>
+              <p class="mt-1 text-sm text-on-surface-variant">Addis Ababa, Ethiopia</p>
+            </div>
+          </div>
         </div>
-        <?php endif; ?>
-
-        <form method="POST" action="<?= APP_URL ?>/contact" id="contactForm">
-          <input type="hidden" name="csrf_token" value="<?= e($_SESSION['csrf_token']) ?>" />
-
-          <div class="form-group">
-            <label for="name">Full Name <span style="color:#ef4444;">*</span></label>
-            <input type="text" id="name" name="name" placeholder="Your full name"
-                   value="<?= e($user['full_name'] ?? '') ?>" required />
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email <span style="color:#ef4444;">*</span></label>
-            <input type="email" id="email" name="email" placeholder="your@email.com"
-                   value="<?= e($user['email'] ?? '') ?>" required />
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Phone (optional)</label>
-            <input type="tel" id="phone" name="phone" placeholder="+251 900 000 000" />
-          </div>
-
-          <div class="form-group">
-            <label for="message">Message <span style="color:#ef4444;">*</span></label>
-            <textarea id="message" name="message" rows="5" placeholder="How can we help you?" required
-                      style="width:100%;padding:0.75rem 1rem;border:1px solid #e2e8f0;border-radius:8px;font-family:inherit;font-size:1rem;resize:vertical;"></textarea>
-          </div>
-
-          <button type="submit" class="btn-primary btn-block" id="contactBtn">Send Message</button>
-        </form>
       </div>
 
-      <!-- Info Panel -->
-      <div class="contact-info" style="padding-left:1rem;">
-        <div style="margin-bottom:2rem;">
-          <h3 style="margin-bottom:1rem;">Get in Touch</h3>
-          <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1rem;">
-            <i class="fas fa-envelope" style="color:#2563eb;margin-top:0.2rem;"></i>
-            <div>
-              <p style="margin:0;font-weight:600;">Email</p>
-              <p style="margin:0;color:#64748b;">info@rentsmart.com</p>
-            </div>
-          </div>
-          <div style="display:flex;gap:0.75rem;align-items:flex-start;margin-bottom:1rem;">
-            <i class="fas fa-phone" style="color:#2563eb;margin-top:0.2rem;"></i>
-            <div>
-              <p style="margin:0;font-weight:600;">Phone</p>
-              <p style="margin:0;color:#64748b;">+251 900 000 000</p>
-            </div>
-          </div>
-          <div style="display:flex;gap:0.75rem;align-items:flex-start;">
-            <i class="fas fa-map-marker-alt" style="color:#2563eb;margin-top:0.2rem;"></i>
-            <div>
-              <p style="margin:0;font-weight:600;">Location</p>
-              <p style="margin:0;color:#64748b;">Addis Ababa, Ethiopia</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="background:#f8fafc;border-radius:12px;padding:1.5rem;">
-          <h4 style="margin-bottom:0.5rem;">Office Hours</h4>
-          <p style="color:#64748b;margin:0;">Mon–Fri: 8:00 AM – 6:00 PM</p>
-          <p style="color:#64748b;margin:0;">Sat: 9:00 AM – 3:00 PM</p>
-          <p style="color:#64748b;margin:0;">Sun: Closed</p>
+      <div class="app-card p-7">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Office hours</p>
+        <div class="mt-5 space-y-3 text-sm leading-7 text-on-surface-variant">
+          <p>Monday to Friday: 8:00 AM to 6:00 PM</p>
+          <p>Saturday: 9:00 AM to 3:00 PM</p>
+          <p>Sunday: Closed</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
+      <div class="overflow-hidden rounded-[1.75rem] bg-primary p-7 text-white shadow-float">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Listing assistance</p>
+        <h3 class="mt-4 text-2xl font-semibold tracking-tight">Need help publishing or managing a property?</h3>
+        <p class="mt-4 text-sm leading-7 text-slate-200">
+          RentSmart already supports landlord dashboards and property detail pages. Use this form when you need operational help with listings or account access.
+        </p>
+      </div>
+    </aside>
+  </section>
+</main>
 <?php include __DIR__ . '/partials/footer.php'; ?>
-<script src="<?= APP_URL ?>/assets/javascript/script.js"></script>
-<script>
-document.getElementById('contactForm').addEventListener('submit', function() {
-  const btn = document.getElementById('contactBtn');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
-});
-</script>
-</body>
-</html>

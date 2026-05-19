@@ -8,7 +8,10 @@ class AuthController extends BaseController
     public function showLogin(): void
     {
         $this->requireGuest();
-        $this->view('login');
+        $old = $_SESSION['login_old_input'] ?? [];
+        unset($_SESSION['login_old_input']);
+
+        $this->view('login', ['old' => $old]);
     }
 
     public function login(): void
@@ -18,6 +21,11 @@ class AuthController extends BaseController
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             $this->redirect('login');
         }
+
+        $_SESSION['login_old_input'] = [
+            'email'    => trim($_POST['email'] ?? ''),
+            'remember' => isset($_POST['remember']),
+        ];
 
         $validator = new Validator($_POST);
         $validator->required('email',    'Email')
@@ -35,6 +43,7 @@ class AuthController extends BaseController
             $validator->get('password'),
             isset($_POST['remember'])
         )) {
+            unset($_SESSION['login_old_input']);
             $this->flash('success', 'Welcome back!');
             $this->redirect('dashboard');
         } else {

@@ -21,6 +21,7 @@ define('APP_ENV',   $_ENV['APP_ENV']   ?? 'development');
 define('APP_DEBUG', in_array($_ENV['APP_DEBUG'] ?? 'true', ['true','1',true], true));
 // APP_URL = base URL to the /public directory (no trailing slash)
 define('APP_URL', rtrim($_ENV['APP_URL'] ?? 'http://localhost/RentSmart/public', '/'));
+define('APP_BASE_URL', preg_replace('#/public$#', '', APP_URL) ?: APP_URL);
 
 define('DB_HOST',    $_ENV['DB_HOST']    ?? 'localhost');
 define('DB_PORT',    (int)($_ENV['DB_PORT'] ?? 3306));
@@ -32,9 +33,15 @@ define('DB_CHARSET', 'utf8mb4');
 define('SESSION_LIFETIME',  (int)($_ENV['SESSION_LIFETIME']  ?? 7200));
 define('REMEMBER_LIFETIME', (int)($_ENV['REMEMBER_LIFETIME'] ?? 2592000));
 
-// Uploads are stored in /public/assets/uploads (web-accessible)
-define('UPLOAD_DIR', dirname(__DIR__) . '/public/assets/uploads');
-define('UPLOAD_URL', APP_URL . '/assets/uploads');
+// Property uploads are stored on the filesystem at /uploads/properties
+define('UPLOADS_DIR', APP_ROOT . '/uploads');
+define('UPLOADS_URL', APP_BASE_URL . '/uploads');
+define('PROPERTY_UPLOADS_SUBDIR', 'uploads/properties');
+define('PROPERTY_UPLOAD_DIR', APP_ROOT . '/uploads/properties');
+define('PROPERTY_UPLOAD_URL', APP_BASE_URL . '/uploads/properties');
+define('UPLOADS_HANDLER_URL', APP_URL . '/uploads.php');
+define('LEGACY_UPLOAD_DIR', APP_ROOT . '/public/assets/uploads');
+define('LEGACY_UPLOAD_URL', APP_URL . '/assets/uploads');
 define('MAX_FILE_SIZE',      (int)($_ENV['MAX_FILE_SIZE'] ?? 5242880));
 define('ALLOWED_MIME_TYPES', ['image/jpeg','image/png','image/webp']);
 define('ALLOWED_EXTENSIONS', ['jpg','jpeg','png','webp']);

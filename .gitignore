@@ -1,1 +1,13 @@
 .env
+/tools
+/node_modules
+/dist   
+/build
+/coverage
+.DS_Store
+*.log
+*.lock
+*.tmp
+.idea
+.vscode
+/legacy

@@ -1,153 +1,137 @@
-/**
- * RentSmart Main Script
- * Handles UI interactions, mobile menu, tabs, and wishlist states.
- */
-
 document.addEventListener('DOMContentLoaded', () => {
+  const body = document.body;
+  const appUrl = body.dataset.appUrl || '';
+  const csrfToken = body.dataset.csrfToken || '';
 
-  // ── Mobile Menu Toggle ─────────────────────────────────────────────────────
-  const menuToggle = document.querySelector('.menu-toggle');
-  const navMenu    = document.querySelector('.nav-menu');
+  const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+  const mobileMenu = document.querySelector('[data-mobile-menu]');
 
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      menuToggle.classList.toggle('active');
-      const icon = menuToggle.querySelector('i');
-      if (icon) {
-        const isOpen = navMenu.classList.contains('active');
-        icon.classList.toggle('fa-bars',  !isOpen);
-        icon.classList.toggle('fa-times',  isOpen);
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-      }
-    });
-
-    // Close menu when a link is clicked
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuToggle.classList.remove('active');
-        document.body.style.overflow = '';
-        const icon = menuToggle.querySelector('i');
-        if (icon) { icon.classList.replace('fa-times', 'fa-bars'); }
-      });
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
     });
   }
 
-  // ── Navbar scroll shadow ───────────────────────────────────────────────────
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    const updateNav = () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    };
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-  }
-
-  // ── Search Tabs (hero + search results listing-type tabs) ──────────────────
-  document.querySelectorAll('.search-tab[data-mode]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const parent = btn.closest('.search-tabs');
-      if (!parent) return;
-      parent.querySelectorAll('.search-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      // Update hidden listing_type input if present
-      const hiddenInput = document.getElementById('filter-listing-type')
-                       || document.getElementById('heroListingType');
-      if (hiddenInput) {
-        hiddenInput.value = btn.dataset.mode === 'buy' ? 'sale' : 'rent';
-      }
-
-      // Client-side property card filtering (static pages only)
-      const cards = document.querySelectorAll('.property-card[data-mode]');
-      if (cards.length > 0) {
-        let count = 0;
-        cards.forEach(card => {
-          const show = card.dataset.mode === btn.dataset.mode;
-          card.style.display = show ? '' : 'none';
-          if (show) count++;
-        });
-
-        const heading  = document.querySelector('.search-results-layout h1');
-        const countEl  = document.querySelector('.search-results-layout p');
-        if (heading) {
-          heading.textContent = `Properties for ${btn.dataset.mode === 'buy' ? 'Sale' : 'Rent'} in Addis Ababa`;
-        }
-        if (countEl) {
-          countEl.textContent = `Showing ${count} result${count !== 1 ? 's' : ''}`;
-        }
-      }
+  document.querySelectorAll('[data-flash-close]').forEach((button) => {
+    button.addEventListener('click', () => {
+      button.closest('[data-flash-banner]')?.remove();
     });
   });
 
-  // ── Bedroom filter buttons ─────────────────────────────────────────────────
-  document.querySelectorAll('.bedroom-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const beds    = btn.dataset.beds;
-      const input   = document.getElementById('bedroomsInput');
-      const current = input ? input.value : '';
-
-      document.querySelectorAll('.bedroom-btn').forEach(b => b.classList.remove('active-filter'));
-
-      if (current === beds) {
-        if (input) input.value = '';
-      } else {
-        btn.classList.add('active-filter');
-        if (input) input.value = beds;
-      }
-    });
-  });
-
-  // ── Wishlist (heart) buttons — static pages ────────────────────────────────
-  // On static HTML pages (fallback) just toggle visual state
-  document.querySelectorAll('.wishlist-btn:not(.js-favorite):not(a)').forEach(btn => {
-    btn.addEventListener('click', e => {
-      e.preventDefault();
-      e.stopPropagation();
-      btn.classList.toggle('active');
-    });
-  });
-
-  // ── Gallery thumbnail swap ─────────────────────────────────────────────────
-  document.querySelectorAll('.gallery-thumb').forEach(img => {
-    img.addEventListener('click', () => {
-      const main = document.getElementById('mainGalleryImg');
-      if (main) {
-        const tmp = main.src;
-        main.src  = img.src;
-        img.src   = tmp;
-      }
-    });
-  });
-
-  // ── Scroll-reveal for property cards ──────────────────────────────────────
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity  = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.property-card, .step-card, .testimonial-card').forEach(el => {
-      el.style.opacity   = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-      observer.observe(el);
-    });
-  }
-
-  // ── Auto-dismiss flash banners after 5 s ──────────────────────────────────
-  document.querySelectorAll('.alert-banner').forEach(banner => {
-    setTimeout(() => {
-      banner.style.transition = 'opacity 0.5s';
-      banner.style.opacity    = '0';
-      setTimeout(() => banner.remove(), 500);
+  document.querySelectorAll('[data-flash-banner]').forEach((banner) => {
+    window.setTimeout(() => {
+      banner.remove();
     }, 5000);
   });
 
+  document.querySelectorAll('[data-password-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const target = document.getElementById(button.dataset.passwordToggle || '');
+      if (!target) {
+        return;
+      }
+
+      const isPassword = target.getAttribute('type') === 'password';
+      target.setAttribute('type', isPassword ? 'text' : 'password');
+
+      const icon = button.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.textContent = isPassword ? 'visibility_off' : 'visibility';
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-listing-toggle]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const group = button.closest('[data-listing-toggle-group]');
+      if (!group) {
+        return;
+      }
+
+      group.querySelectorAll('[data-listing-toggle]').forEach((item) => {
+        item.classList.remove('bg-primary', 'text-white');
+        item.classList.add('bg-surface-container-lowest', 'text-on-surface-variant');
+      });
+
+      button.classList.remove('bg-surface-container-lowest', 'text-on-surface-variant');
+      button.classList.add('bg-primary', 'text-white');
+
+      const hiddenInput = document.getElementById(group.dataset.target || '');
+      if (hiddenInput) {
+        hiddenInput.value = button.dataset.listingToggle;
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-gallery-thumb]').forEach((thumb) => {
+    thumb.addEventListener('click', () => {
+      const target = document.getElementById(thumb.dataset.galleryTarget || '');
+      if (!target) {
+        return;
+      }
+
+      target.setAttribute('src', thumb.getAttribute('src') || '');
+    });
+  });
+
+  document.querySelectorAll('[data-favorite-toggle]').forEach((button) => {
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const propertyId = button.dataset.propertyId;
+      if (!propertyId || !appUrl) {
+        return;
+      }
+
+      try {
+        const response = await fetch(`${appUrl}/api/toggle-favorite/${propertyId}`, {
+          method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': csrfToken
+          }
+        });
+
+        if (response.status === 401) {
+          window.location.href = `${appUrl}/login`;
+          return;
+        }
+
+        const data = await response.json();
+        const favorited = Boolean(data.favorited);
+        const icon = button.querySelector('.material-symbols-outlined');
+        const label = button.querySelector('[data-favorite-label]');
+
+        button.dataset.favorited = favorited ? 'true' : 'false';
+
+        if (icon) {
+          icon.style.fontVariationSettings = `'FILL' ${favorited ? 1 : 0}`;
+        }
+
+        if (label) {
+          label.textContent = favorited
+            ? (button.dataset.labelActive || 'Saved')
+            : (button.dataset.labelInactive || 'Save');
+        }
+
+        if (!favorited && button.hasAttribute('data-remove-on-unfavorite')) {
+          const card = button.closest('[data-property-card]');
+          const collection = button.closest('[data-property-collection]');
+
+          card?.remove();
+
+          if (collection && !collection.querySelector('[data-property-card]')) {
+            collection.classList.add('hidden');
+
+            const emptyStateId = collection.dataset.emptyStateTarget || '';
+            if (emptyStateId) {
+              document.getElementById(emptyStateId)?.classList.remove('hidden');
+            }
+          }
+        }
+      } catch (error) {
+        window.location.href = `${appUrl}/login`;
+      }
+    });
+  });
 });

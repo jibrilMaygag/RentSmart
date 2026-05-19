@@ -13,21 +13,43 @@ function formatPrice(float $price): string
     return number_format($price, 2, '.', ',') . ' ' . CURRENCY;
 }
 
-function imageUrl(string $filename): string
+function imageUrl(string $path): string
 {
-    if (empty($filename)) {
+    if (empty($path)) {
         return APP_URL . '/assets/media/img/' . DEFAULT_PROPERTY_IMG;
     }
-    // Uploaded file (prefixed with prop_ or stored in uploads dir)
-    if (str_starts_with($filename, 'prop_') || str_starts_with($filename, 'upload_')) {
-        return UPLOAD_URL . '/' . rawurlencode($filename);
+
+    $normalizedPath = ltrim(str_replace('\\', '/', trim($path)), '/');
+
+    if ($normalizedPath === '') {
+        return APP_URL . '/assets/media/img/' . DEFAULT_PROPERTY_IMG;
     }
-    // Absolute URL already
-    if (str_starts_with($filename, 'http')) {
-        return $filename;
+
+    if (preg_match('#^https?://#i', $normalizedPath) === 1) {
+        return $normalizedPath;
     }
-    // Static media image
-    return APP_URL . '/assets/media/img/' . rawurlencode($filename);
+
+    if (str_starts_with($normalizedPath, PROPERTY_UPLOADS_SUBDIR . '/')) {
+        return UPLOADS_HANDLER_URL . '?path=' . rawurlencode($normalizedPath);
+    }
+
+    if (str_starts_with($normalizedPath, 'assets/')) {
+        return APP_BASE_URL . '/' . encodeUrlPath($normalizedPath);
+    }
+
+    if ((str_starts_with($normalizedPath, 'prop_') || str_starts_with($normalizedPath, 'upload_'))
+        && str_contains($normalizedPath, '/') === false
+    ) {
+        return LEGACY_UPLOAD_URL . '/' . rawurlencode($normalizedPath);
+    }
+
+    return APP_URL . '/assets/media/img/' . rawurlencode($normalizedPath);
+}
+
+function encodeUrlPath(string $path): string
+{
+    $segments = array_filter(explode('/', trim(str_replace('\\', '/', $path), '/')), 'strlen');
+    return implode('/', array_map('rawurlencode', $segments));
 }
 
 function redirect(string $path, int $statusCode = 302): never
@@ -75,6 +97,51 @@ function route(string $path, array $params = []): string
         $url .= '?' . http_build_query($params);
     }
     return $url;
+}
+
+function asset(string $path): string
+{
+    return APP_URL . '/assets/' . ltrim($path, '/');
+}
+
+function currentPath(): string
+{
+    $requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+    $basePath = parse_url(APP_URL, PHP_URL_PATH) ?: '';
+    $relativePath = '/' . ltrim(substr($requestPath, strlen($basePath)), '/');
+
+    if ($relativePath !== '/' && str_ends_with($relativePath, '/')) {
+        $relativePath = rtrim($relativePath, '/');
+    }
+
+    return $relativePath === '' ? '/' : $relativePath;
+}
+
+function routeIs(string ...$paths): bool
+{
+    $path = currentPath();
+
+    foreach ($paths as $candidate) {
+        if ($candidate === $path) {
+            return true;
+        }
+
+        if ($candidate !== '/' && str_starts_with($path, $candidate . '/')) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function userFirstName(array|null $user): string
+{
+    if (!$user || empty($user['full_name'])) {
+        return 'Guest';
+    }
+
+    $parts = preg_split('/\s+/', trim($user['full_name']));
+    return $parts[0] ?? 'Guest';
 }
 
 function formatBytes(int $bytes): string

@@ -1,350 +1,296 @@
 <?php
 /**
- * @var array   $featured   Featured properties from DB (may be empty)
- * @var array   $cities     Available cities from DB
- * @var int     $totalProps Total available properties
- * @var array|null $user    Logged-in user or null
- *
- * Fallback static cards are shown when the DB has no featured properties yet.
+ * @var array      $featured
+ * @var array      $cities
+ * @var int        $totalProps
+ * @var array|null $user
  */
+$pageTitle = 'RentSmart | Premium Rental Marketplace';
+$bodyClass = 'app-shell';
 
-// Static fallback data used when DB is empty
-$staticProperties = [
-    ['id'=>0,'title'=>'Modern Apartment','city'=>'Addis Ababa','sub_city'=>'Bole','price'=>30200,'listing_type'=>'rent','property_type'=>'apartment','bedrooms'=>2,'bathrooms'=>2,'area_sqm'=>120,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-106399.jpeg','badge'=>'new'],
-    ['id'=>0,'title'=>'Luxury Villa','city'=>'Addis Ababa','sub_city'=>'Ayat','price'=>20400,'listing_type'=>'rent','property_type'=>'villa','bedrooms'=>4,'bathrooms'=>3,'area_sqm'=>280,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-164558.jpeg','badge'=>'premium'],
-    ['id'=>0,'title'=>'Cozy Studio','city'=>'Addis Ababa','sub_city'=>'Kazanchis','price'=>30000,'listing_type'=>'rent','property_type'=>'studio','bedrooms'=>1,'bathrooms'=>1,'area_sqm'=>60,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-271624.jpeg','badge'=>''],
-    ['id'=>0,'title'=>'Family Home','city'=>'Addis Ababa','sub_city'=>'Sar Bet','price'=>20600,'listing_type'=>'rent','property_type'=>'house','bedrooms'=>3,'bathrooms'=>2,'area_sqm'=>180,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-323780_1.jpeg','badge'=>'new'],
-    ['id'=>0,'title'=>'Spacious Family House','city'=>'Addis Ababa','sub_city'=>'Sar Bet','price'=>22000,'listing_type'=>'rent','property_type'=>'house','bedrooms'=>3,'bathrooms'=>2,'area_sqm'=>180,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-1396122.jpeg','badge'=>'premium'],
-    ['id'=>0,'title'=>'Downtown Loft','city'=>'Addis Ababa','sub_city'=>'Piazza','price'=>15500,'listing_type'=>'rent','property_type'=>'apartment','bedrooms'=>1,'bathrooms'=>1,'area_sqm'=>85,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-1080721.jpeg','badge'=>''],
-    ['id'=>0,'title'=>'Luxury Penthouse','city'=>'Addis Ababa','sub_city'=>'Bole','price'=>45000,'listing_type'=>'rent','property_type'=>'apartment','bedrooms'=>3,'bathrooms'=>3,'area_sqm'=>220,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-279746.jpeg','badge'=>'new'],
-    ['id'=>0,'title'=>'Cozy Apartment','city'=>'Addis Ababa','sub_city'=>'Gotera','price'=>18000,'listing_type'=>'rent','property_type'=>'apartment','bedrooms'=>2,'bathrooms'=>1,'area_sqm'=>95,'is_featured'=>1,'status'=>'available','image_filename'=>'pexels-photo-1571460.jpeg','badge'=>''],
+$propertyTypes = [
+    'apartment' => 'Apartment',
+    'house' => 'House',
+    'villa' => 'Villa',
+    'studio' => 'Studio',
+    'office' => 'Office',
+    'land' => 'Land',
 ];
 
-$displayProps = !empty($featured) ? $featured : $staticProperties;
-$usingStatic  = empty($featured);
+$cityImages = [
+    'Addis Ababa' => 'pexels-photo-358488.jpeg',
+    'Dire Dawa' => 'pexels-photo-3225529.jpeg',
+    'Bahir Dar' => 'pexels-photo-259962.jpeg',
+    'Hawassa' => 'pexels-photo-2166553.jpeg',
+    'Adama' => 'pexels-photo-323780.jpeg',
+    'Gondar' => 'pexels-photo-279746.jpeg',
+];
+
+$featuredCities = array_slice(!empty($cities) ? $cities : array_keys($cityImages), 0, 4);
+
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/partials/header.php';
 ?>
-<!doctype html>
-<html lang="en">
+<main class="pb-16 pt-24 sm:pt-28">
+  <section class="relative isolate overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="<?= e(imageUrl('pexels-photo-358488.jpeg')) ?>"
+        alt="Modern RentSmart property exterior"
+        class="h-full w-full object-cover"
+      />
+      <div class="absolute inset-0 bg-slate-950/55"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-950/45 to-slate-950/15"></div>
+    </div>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RentSmart – Find Your Perfect Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-  <link rel="stylesheet" href="<?= APP_URL ?>/assets/css/style.css" />
-</head>
-
-<body>
-
-<?php include __DIR__ . '/partials/navbar.php'; ?>
-
-<!-- Flash Messages -->
-<?php if ($msg = flash('success')): ?>
-<div class="alert-banner alert-success"><i class="fas fa-check-circle"></i> <?= e($msg) ?>
-  <button class="alert-close" onclick="this.parentElement.remove()">×</button></div>
-<?php endif; ?>
-<?php if ($msg = flash('error')): ?>
-<div class="alert-banner alert-danger"><i class="fas fa-exclamation-circle"></i> <?= e($msg) ?>
-  <button class="alert-close" onclick="this.parentElement.remove()">×</button></div>
-<?php endif; ?>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero-content">
-    <h1>Find Your Perfect Home</h1>
-    <p>Rent or buy beautiful homes in prime locations<?php if ($totalProps > 0): ?> — <?= number_format($totalProps) ?>+ available<?php endif; ?></p>
-
-    <div class="search-box">
-      <div class="search-tabs">
-        <button class="search-tab active" data-type="rent">Rent</button>
-        <button class="search-tab" data-type="sale">Buy</button>
+    <div class="app-container relative z-10 py-16 sm:py-24 lg:py-32">
+      <div class="max-w-4xl">
+        <span class="inline-flex rounded-full bg-secondary/20 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-secondary-container">
+          Smart rental marketplace
+        </span>
+        <h1 class="mt-8 max-w-4xl text-5xl font-bold tracking-[-0.02em] text-white sm:text-6xl lg:text-7xl">
+          Your home is waiting
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-100 sm:text-xl">
+          Discover verified properties, connect with trusted landlords, and find your perfect rental in one seamless experience.
+        </p>
       </div>
 
-      <form class="search-form" action="<?= APP_URL ?>/search" method="GET" id="heroSearchForm">
-        <input type="hidden" name="listing_type" id="heroListingType" value="rent" />
+      <div class="mt-12 max-w-5xl rounded-[1.5rem] border border-white/15 bg-white/92 p-3 shadow-float backdrop-blur-xl">
+        <div class="app-card overflow-hidden border-none bg-transparent shadow-none">
+          <div class="border-b border-outline-variant/20 px-4 py-5 sm:px-6">
+            <?php include __DIR__ . '/partials/flash.php'; ?>
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary">Begin your search</p>
+                <h2 class="mt-2 text-2xl font-bold tracking-tight text-primary">Find properties in seconds</h2>
+              </div>
+              <div
+                class="inline-flex rounded-2xl border border-outline-variant/30 bg-surface-container-low p-1"
+                data-listing-toggle-group
+                data-target="homeListingType"
+              >
+                <button
+                  type="button"
+                  data-listing-toggle="rent"
+                  class="rounded-xl px-5 py-2 text-sm font-semibold bg-primary text-white"
+                >
+                  Rent
+                </button>
+                <button
+                  type="button"
+                  data-listing-toggle="sale"
+                  class="rounded-xl px-5 py-2 text-sm font-semibold bg-surface-container-lowest text-on-surface-variant"
+                >
+                  Buy
+                </button>
+              </div>
+            </div>
+          </div>
 
-        <div class="search-input">
-          <label>Location</label>
-          <input type="text" name="city" list="cities-list" placeholder="City or area" />
-          <datalist id="cities-list">
-            <?php if (!empty($cities)): ?>
-              <?php foreach ($cities as $city): ?>
-              <option value="<?= e($city) ?>"></option>
-              <?php endforeach; ?>
-            <?php else: ?>
-              <option value="Addis Ababa"></option>
-              <option value="Dire Dawa"></option>
-              <option value="Bahir Dar"></option>
-              <option value="Hawassa"></option>
-              <option value="Adama"></option>
-              <option value="Gondar"></option>
-              <option value="Mekelle"></option>
-              <option value="Jimma"></option>
-              <option value="Bishoftu"></option>
-            <?php endif; ?>
-          </datalist>
+          <form action="<?= route('search') ?>" method="GET" class="grid gap-3 px-4 py-5 sm:grid-cols-2 sm:px-6 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_auto]">
+            <input type="hidden" name="listing_type" id="homeListingType" value="rent" />
+
+            <div>
+              <label for="homeCity" class="field-label">Where</label>
+              <input
+                id="homeCity"
+                name="city"
+                list="home-cities"
+                class="field-input"
+                placeholder="City or neighborhood"
+              />
+              <datalist id="home-cities">
+                <?php foreach ($cities as $city): ?>
+                <option value="<?= e($city) ?>"></option>
+                <?php endforeach; ?>
+              </datalist>
+            </div>
+
+            <div>
+              <label for="homePropertyType" class="field-label">Property type</label>
+              <select id="homePropertyType" name="property_type" class="field-input">
+                <option value="">Any type</option>
+                <?php foreach ($propertyTypes as $value => $label): ?>
+                <option value="<?= e($value) ?>"><?= e($label) ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+
+            <div>
+              <label for="homeMaxPrice" class="field-label">Budget</label>
+              <select id="homeMaxPrice" name="max_price" class="field-input">
+                <option value="">Any budget</option>
+                <option value="10000">Up to 10,000 ETB</option>
+                <option value="20000">Up to 20,000 ETB</option>
+                <option value="30000">Up to 30,000 ETB</option>
+                <option value="50000">Up to 50,000 ETB</option>
+              </select>
+            </div>
+
+            <div class="flex items-end">
+              <button type="submit" class="btn-primary w-full lg:w-auto px-8 py-3.5 text-base font-semibold gap-2">
+                <span class="material-symbols-outlined text-base">search</span>
+                <span>Search Properties</span>
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
 
-        <div class="search-input">
-          <label>Property Type</label>
-          <select name="property_type">
-            <option value="">Any Type</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="villa">Villa</option>
-            <option value="studio">Studio</option>
-            <option value="office">Office</option>
-          </select>
+      <div class="mt-10 grid gap-4 sm:grid-cols-3">
+        <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-md">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-3xl text-secondary">apartment</span>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">Active listings</p>
+              <p class="mt-1 text-3xl font-bold text-white"><?= number_format($totalProps) ?></p>
+            </div>
+          </div>
         </div>
-
-        <div class="search-input">
-          <label>Price Range</label>
-          <select name="max_price">
-            <option value="">Any Price</option>
-            <option value="10000">Up to 10,000 ETB</option>
-            <option value="20000">Up to 20,000 ETB</option>
-            <option value="30000">Up to 30,000 ETB</option>
-            <option value="50000">Up to 50,000 ETB</option>
-          </select>
+        <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-md">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-3xl text-secondary">location_on</span>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">Locations</p>
+              <p class="mt-1 text-3xl font-bold text-white"><?= number_format(count($cities)) ?></p>
+            </div>
+          </div>
         </div>
-
-        <button type="submit" class="btn-search">Search</button>
-      </form>
+        <div class="rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-md">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-3xl text-secondary">verified_user</span>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">Trusted</p>
+              <p class="mt-1 text-base font-medium leading-6 text-slate-100">Verified listings &amp; secure messaging</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FEATURED PROPERTIES -->
-<section class="featured-properties">
-  <div class="container">
-    <div class="section-header">
-      <h2>Featured Properties</h2>
-      <p><?= $usingStatic ? 'Handpicked homes just for you' : 'Live listings from our database' ?></p>
+  <section class="app-container py-16 sm:py-20">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <span class="section-eyebrow">Curated selection</span>
+        <h2 class="text-3xl font-semibold tracking-tight text-primary">Featured properties</h2>
+        <p class="mt-3 max-w-2xl text-base leading-7 text-on-surface-variant">
+          Live featured listings pulled directly from RentSmart. Save any property and continue the journey from your dashboard.
+        </p>
+      </div>
+      <a href="<?= route('search') ?>" class="btn-secondary">
+        View all listings
+      </a>
     </div>
 
-    <div class="properties-grid">
-      <?php foreach ($displayProps as $p):
-        $imgSrc  = imageUrl($p['image_filename'] ?? DEFAULT_PROPERTY_IMG);
-        $detailUrl = ($p['id'] > 0) ? APP_URL . '/property/' . $p['id'] : '#';
-        $badge   = $p['badge'] ?? ($p['is_featured'] ? 'new' : '');
-        $period  = ($p['listing_type'] === 'rent') ? '/ month' : '';
-        $subCity = $p['sub_city'] ?? '';
-        $location = e($p['city']) . ($subCity ? ', ' . e($subCity) : '');
-      ?>
-      <a href="<?= $detailUrl ?>" class="property-card" data-mode="<?= $p['listing_type'] === 'sale' ? 'buy' : 'rent' ?>">
-        <div class="property-image">
-          <img src="<?= $imgSrc ?>" alt="<?= e($p['title']) ?>" loading="lazy" />
-          <?php if ($badge): ?>
-          <span class="property-badge <?= e($badge) ?>"><?= ucfirst($badge) ?></span>
-          <?php endif; ?>
+    <?php if (!empty($featured)): ?>
+    <div class="property-grid mt-10">
+        <?php foreach ($featured as $property): ?>
+          <?php
+        $showFavoriteButton = !$user || (($user['role'] ?? 'renter') === 'renter');
+        $badgeLabel = !empty($property['is_featured']) ? 'Featured' : '';
+        include __DIR__ . '/partials/property-card.php';
+        ?>
+      <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+    <div class="app-card mt-10 p-8 text-center">
+      <span class="material-symbols-outlined text-4xl text-primary-fixed-variant">real_estate_agent</span>
+      <h3 class="mt-4 text-2xl font-semibold tracking-tight text-primary">No featured properties yet</h3>
+      <p class="mx-auto mt-3 max-w-xl text-base leading-7 text-on-surface-variant">
+        The backend is live and ready. Browse the full catalog or contact the team if you need help publishing the next featured listing.
+      </p>
+      <div class="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="<?= route('search') ?>" class="btn-primary">Browse Properties</a>
+        <a href="<?= route('contact') ?>" class="btn-secondary">Contact Support</a>
+      </div>
+    </div>
+    <?php endif; ?>
+  </section>
+
+  <section class="border-y border-outline-variant/20 bg-surface-container-low">
+    <div class="app-container py-16 sm:py-20">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <span class="section-eyebrow">Popular locations</span>
+          <h2 class="text-3xl font-semibold tracking-tight text-primary">Explore city by city</h2>
+          <p class="mt-3 max-w-2xl text-base leading-7 text-on-surface-variant">
+            Jump into the most active markets already represented in the database.
+          </p>
+        </div>
+        <a href="<?= route('search') ?>" class="text-sm font-semibold text-primary transition hover:text-secondary">See all cities</a>
+      </div>
+
+      <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <?php foreach ($featuredCities as $city): ?>
+          <?php $cityImage = $cityImages[$city] ?? 'pexels-photo-323780_1.jpeg'; ?>
+        <a href="<?= route('search', ['city' => $city]) ?>" class="group relative overflow-hidden rounded-[1.5rem] shadow-soft">
+          <img
+            src="<?= e(imageUrl($cityImage)) ?>"
+            alt="<?= e($city) ?>"
+            class="h-72 w-full object-cover transition duration-700 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/35 to-transparent"></div>
+          <div class="absolute inset-x-0 bottom-0 p-6">
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-secondary-container">Explore</p>
+            <h3 class="mt-2 text-2xl font-semibold tracking-tight text-white"><?= e($city) ?></h3>
+            <p class="mt-2 text-sm text-slate-200">View available listings and refine by type, budget, and bedrooms.</p>
+          </div>
+        </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-container py-16 sm:py-20">
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="app-card p-8">
+        <span class="material-symbols-outlined inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary text-white">person_search</span>
+        <h3 class="mt-6 text-2xl font-semibold tracking-tight text-primary">For renters</h3>
+        <div class="mt-6 space-y-5 text-sm leading-7 text-on-surface-variant">
+          <p><span class="font-semibold text-primary">01.</span> Search real listings by location, price, property type, and bedrooms.</p>
+          <p><span class="font-semibold text-primary">02.</span> Open full property details, review amenities, and contact landlords once you sign in.</p>
+          <p><span class="font-semibold text-primary">03.</span> Save properties and return to them later from a streamlined renter dashboard.</p>
+        </div>
+        <a href="<?= route('search') ?>" class="btn-secondary mt-8">Browse properties</a>
+      </div>
+
+      <div class="app-card p-8">
+        <span class="material-symbols-outlined inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-white">home_work</span>
+        <h3 class="mt-6 text-2xl font-semibold tracking-tight text-primary">For landlords</h3>
+        <div class="mt-6 space-y-5 text-sm leading-7 text-on-surface-variant">
+          <p><span class="font-semibold text-primary">01.</span> Existing landlord accounts already see their listings inside the dashboard.</p>
+          <p><span class="font-semibold text-primary">02.</span> Property pages present your pricing, amenity details, and contact information clearly.</p>
+          <p><span class="font-semibold text-primary">03.</span> Need help publishing or updating a listing? The contact flow is already connected to the backend.</p>
+        </div>
+        <a href="<?= route('contact') ?>" class="btn-primary mt-8">Contact the team</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-container pb-16">
+    <div class="overflow-hidden rounded-[2rem] bg-primary px-6 py-10 text-white shadow-float sm:px-10 sm:py-12">
+      <div class="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <span class="text-xs font-semibold uppercase tracking-[0.22em] text-secondary-container">RentSmart</span>
+          <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+            A modern rental platform built for seamless transactions.
+          </h2>
+          <p class="mt-4 text-base leading-7 text-slate-200">
+            Experience a fully integrated marketplace where property owners and renters connect securely. Your listings, favorites, messages, and transactions all work together seamlessly on one unified platform.
+          </p>
+        </div>
+        <div class="flex flex-col gap-3 sm:flex-row">
           <?php if ($user): ?>
-          <button class="wishlist-btn js-favorite" data-id="<?= (int)$p['id'] ?>" aria-label="Toggle wishlist">♥</button>
+          <a href="<?= route('dashboard') ?>" class="btn-secondary border-white/20 bg-white/10 text-white hover:bg-white/15">Open Dashboard</a>
           <?php else: ?>
-          <a href="<?= APP_URL ?>/login" class="wishlist-btn" aria-label="Login to save">♥</a>
+          <a href="<?= route('signup') ?>" class="btn-secondary border-white/20 bg-white/10 text-white hover:bg-white/15">Create account</a>
           <?php endif; ?>
-        </div>
-
-        <div class="property-content">
-          <div class="property-price">
-            <span class="price"><?= number_format($p['price']) ?> ETB</span>
-            <?php if ($period): ?><span class="period"><?= $period ?></span><?php endif; ?>
-          </div>
-
-          <h3 class="property-title"><?= e($p['title']) ?></h3>
-          <p class="property-location"><?= $location ?></p>
-
-          <div class="property-features">
-            <span><?= (int)$p['bedrooms'] ?> Bed<?= $p['bedrooms'] != 1 ? 's' : '' ?></span>
-            <span><?= (int)$p['bathrooms'] ?> Bath<?= $p['bathrooms'] != 1 ? 's' : '' ?></span>
-            <?php if (!empty($p['area_sqm'])): ?>
-            <span><?= number_format($p['area_sqm']) ?> m²</span>
-            <?php endif; ?>
-          </div>
-
-          <div class="property-tags">
-            <span class="tag"><?= ucfirst($p['property_type'] ?? 'Property') ?></span>
-            <span class="tag"><?= ($p['listing_type'] === 'sale') ? 'For Sale' : 'For Rent' ?></span>
-          </div>
-        </div>
-      </a>
-      <?php endforeach; ?>
-    </div>
-
-    <div class="view-more">
-      <a href="<?= APP_URL ?>/search" class="btn-outline large">View More</a>
-    </div>
-  </div>
-</section>
-
-<!-- POPULAR LOCATIONS -->
-<section class="popular-locations">
-  <div class="container">
-    <div class="section-header">
-      <h2>Popular Locations</h2>
-      <p>Find your next home in these top cities</p>
-    </div>
-
-    <div class="locations-grid">
-      <?php
-      $locationData = [
-          ['name'=>'Addis Ababa', 'img'=>'pexels-photo-358488.jpeg'],
-          ['name'=>'Hawassa',     'img'=>'pexels-photo-2166553.jpeg'],
-          ['name'=>'Dire Dawa',   'img'=>'pexels-photo-3225529.jpeg'],
-          ['name'=>'Bahir Dar',   'img'=>'pexels-photo-259962_1.jpeg'],
-      ];
-      foreach ($locationData as $loc):
-      ?>
-      <a href="<?= APP_URL ?>/search?city=<?= urlencode($loc['name']) ?>" class="location-card">
-        <img src="<?= APP_URL ?>/assets/media/img/<?= $loc['img'] ?>" alt="<?= e($loc['name']) ?>" loading="lazy" />
-        <div class="location-overlay">
-          <h3><?= e($loc['name']) ?></h3>
-          <p><?= $usingStatic ? '—' : number_format((new Property())->getCityCount($loc['name'])) ?>+ Properties</p>
-        </div>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="how-it-works">
-  <div class="container">
-    <div class="section-header">
-      <h2>How It Works</h2>
-      <p>Simple steps to get your dream home</p>
-    </div>
-    <div class="steps-grid">
-      <div class="step-card">
-        <div class="step-icon"><span class="icon-number">1</span></div>
-        <h3>Search</h3>
-        <p>Browse homes by location, price, and type.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-icon"><span class="icon-number">2</span></div>
-        <h3>Visit</h3>
-        <p>Schedule visits and explore properties.</p>
-      </div>
-      <div class="step-card">
-        <div class="step-icon"><span class="icon-number">3</span></div>
-        <h3>Move In</h3>
-        <p>Finalize the deal and enjoy your new home.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials-section">
-  <div class="container">
-    <div class="section-header">
-      <h2>What Our Clients Say</h2>
-      <p>Real stories from happy homeowners and tenants</p>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card">
-        <div class="testimonial-content"><p>"RentSmart made finding my first apartment so easy. The filters helped me find exactly what I wanted within my budget."</p></div>
-        <div class="testimonial-author">
-          <img src="<?= APP_URL ?>/assets/media/img/pexels-photo-220453.jpeg" alt="Client" />
-          <div class="author-info"><h4>Abebe Kebede</h4><span>Tenant</span></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-content"><p>"Professional service and great listings. I found a tenant for my property in just 2 weeks thanks to this platform."</p></div>
-        <div class="testimonial-author">
-          <img src="<?= APP_URL ?>/assets/media/img/pexels-photo-415829.jpeg" alt="Client" />
-          <div class="author-info"><h4>Sara Tesfaye</h4><span>Property Owner</span></div>
-        </div>
-      </div>
-      <div class="testimonial-card">
-        <div class="testimonial-content"><p>"The detailed property photos saved me so much time. I knew it was the right house before I even visited in person."</p></div>
-        <div class="testimonial-author">
-          <img src="<?= APP_URL ?>/assets/media/img/pexels-photo-774909.jpeg" alt="Client" />
-          <div class="author-info"><h4>Yared Alemu</h4><span>Home Buyer</span></div>
+          <a href="<?= route('search') ?>" class="btn-primary border border-white/0 bg-white text-primary hover:opacity-100">Explore listings</a>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- NEWSLETTER -->
-<section class="newsletter-section">
-  <div class="container newsletter-content">
-    <div class="newsletter-text">
-      <h2>Stay Updated</h2>
-      <p>Subscribe to our newsletter for the latest property listings and market news.</p>
-    </div>
-    <form class="newsletter-form" id="newsletterForm">
-      <input type="email" placeholder="Enter your email address" required />
-      <button type="submit" class="btn-primary">Subscribe</button>
-    </form>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="container cta-content">
-    <h2>Ready to Find Your Home?</h2>
-    <p>Join thousands of happy renters and buyers today</p>
-    <div class="cta-buttons">
-      <?php if ($user): ?>
-        <a href="<?= APP_URL ?>/search" class="btn-primary large">Browse Properties</a>
-        <a href="<?= APP_URL ?>/dashboard" class="btn-outline large">My Dashboard</a>
-      <?php else: ?>
-        <a href="<?= APP_URL ?>/signup" class="btn-primary large">Get Started</a>
-        <a href="<?= APP_URL ?>/contact" class="btn-outline large">Contact Us</a>
-      <?php endif; ?>
-    </div>
-  </div>
-</section>
-
+  </section>
+</main>
 <?php include __DIR__ . '/partials/footer.php'; ?>
-
-<script src="<?= APP_URL ?>/assets/javascript/script.js"></script>
-<script>
-// Hero search tabs → update hidden listing_type field
-document.querySelectorAll('.search-tab[data-type]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.search-tab[data-type]').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('heroListingType').value = btn.dataset.type;
-  });
-});
-
-// Newsletter "subscribe" feedback
-const nlForm = document.getElementById('newsletterForm');
-if (nlForm) {
-  nlForm.addEventListener('submit', e => {
-    e.preventDefault();
-    const btn = nlForm.querySelector('button');
-    btn.textContent = 'Subscribed!';
-    btn.disabled = true;
-    nlForm.querySelector('input').value = '';
-    setTimeout(() => { btn.textContent = 'Subscribe'; btn.disabled = false; }, 3000);
-  });
-}
-
-// Favorite (wishlist) buttons — AJAX toggle
-document.querySelectorAll('.js-favorite').forEach(btn => {
-  btn.addEventListener('click', e => {
-    e.preventDefault();
-    e.stopPropagation();
-    const id = btn.dataset.id;
-    if (!id || id === '0') return;
-
-    fetch(`<?= APP_URL ?>/api/toggle-favorite/${id}`, {
-      method: 'POST',
-      headers: { 'X-CSRF-TOKEN': '<?= e($_SESSION['csrf_token'] ?? '') ?>' }
-    })
-    .then(r => r.json())
-    .then(data => {
-      btn.classList.toggle('active', data.favorited);
-    })
-    .catch(() => {
-      window.location.href = '<?= APP_URL ?>/login';
-    });
-  });
-});
-</script>
-</body>
-</html>

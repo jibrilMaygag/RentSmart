@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS properties (
 CREATE TABLE IF NOT EXISTS property_images (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     property_id INT          NOT NULL,
-    filename    VARCHAR(255) NOT NULL,
+    image_path  VARCHAR(255) NOT NULL,
     is_primary  TINYINT(1)   NOT NULL DEFAULT 0,
     sort_order  TINYINT UNSIGNED NOT NULL DEFAULT 0,
     created_at  TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
