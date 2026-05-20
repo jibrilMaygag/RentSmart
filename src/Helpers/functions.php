@@ -13,16 +13,25 @@ function formatPrice(float $price): string
     return number_format($price, 2, '.', ',') . ' ' . CURRENCY;
 }
 
+function defaultPropertyImageUrl(): string
+{
+    if (preg_match('#^https?://#i', DEFAULT_PROPERTY_IMG) === 1) {
+        return DEFAULT_PROPERTY_IMG;
+    }
+
+    return APP_URL . '/assets/media/img/' . DEFAULT_PROPERTY_IMG;
+}
+
 function imageUrl(string $path): string
 {
     if (empty($path)) {
-        return APP_URL . '/assets/media/img/' . DEFAULT_PROPERTY_IMG;
+        return defaultPropertyImageUrl();
     }
 
     $normalizedPath = ltrim(str_replace('\\', '/', trim($path)), '/');
 
     if ($normalizedPath === '') {
-        return APP_URL . '/assets/media/img/' . DEFAULT_PROPERTY_IMG;
+        return defaultPropertyImageUrl();
     }
 
     if (preg_match('#^https?://#i', $normalizedPath) === 1) {

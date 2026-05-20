@@ -2,6 +2,7 @@
 $pageTitle = 'Sign Up | RentSmart';
 $bodyClass = 'min-h-screen bg-background';
 $old = $_SESSION['old_input'] ?? [];
+$authImage = 'https://images.unsplash.com/photo-1558942548-89bf85600e32?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1400';
 unset($_SESSION['old_input']);
 
 include __DIR__ . '/partials/head.php';
@@ -9,7 +10,7 @@ include __DIR__ . '/partials/head.php';
 <main class="grid min-h-screen lg:grid-cols-2">
   <section class="relative hidden overflow-hidden bg-surface-container-low lg:block">
     <img
-      src="<?= e(imageUrl('pexels-photo-1396122.jpeg')) ?>"
+      src="<?= e(imageUrl($authImage)) ?>"
       alt="RentSmart home interior"
       class="absolute inset-0 h-full w-full object-cover"
     />

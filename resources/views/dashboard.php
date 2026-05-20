@@ -17,7 +17,7 @@ $primaryItems = $isLandlord ? $myProperties : $favorites;
 $primarySectionId = $isLandlord ? 'my-listings' : 'saved-properties';
 $primarySectionTitle = $isLandlord ? 'My Listings' : 'Saved Properties';
 $primarySectionDescription = $isLandlord
-    ? 'Keep an eye on your active listings and jump into updates whenever you need to.'
+    ? 'See how your listings are presented and make quick updates whenever needed.'
     : 'These are the homes you have saved for later.';
 
 include __DIR__ . '/partials/head.php';
@@ -126,8 +126,8 @@ include __DIR__ . '/partials/header.php';
           </div>
         </div>
         <div class="mt-6 space-y-4 text-sm leading-6 text-on-surface-variant">
-          <p><?= $isLandlord ? 'You can review your listings and open each public property page from here.' : 'You can revisit saved homes and continue exploring from the search page.' ?></p>
-          <p>Everything you need is just a few clicks away from your dashboard.</p>
+          <p><?= $isLandlord ? 'Open your listings, check how they appear to renters, and update them whenever something changes.' : 'Revisit saved homes and continue browsing whenever you are ready.' ?></p>
+          <p>Your main shortcuts are all right here.</p>
         </div>
       </div>
 

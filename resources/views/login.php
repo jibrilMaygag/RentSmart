@@ -5,13 +5,14 @@
 $pageTitle = 'Login | RentSmart';
 $bodyClass = 'min-h-screen bg-background';
 $old = $old ?? [];
+$authImage = 'https://images.unsplash.com/photo-1771495562804-373fb516114c?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1400';
 
 include __DIR__ . '/partials/head.php';
 ?>
 <main class="grid min-h-screen lg:grid-cols-2">
   <section class="relative hidden overflow-hidden bg-primary lg:block">
     <img
-      src="<?= e(imageUrl('pexels-photo-164558.jpeg')) ?>"
+      src="<?= e(imageUrl($authImage)) ?>"
       alt="RentSmart architecture background"
       class="absolute inset-0 h-full w-full object-cover opacity-75 mix-blend-luminosity"
     />

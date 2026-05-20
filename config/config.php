@@ -48,4 +48,4 @@ define('ALLOWED_EXTENSIONS', ['jpg','jpeg','png','webp']);
 
 define('ITEMS_PER_PAGE', 9);
 define('CURRENCY', $_ENV['CURRENCY'] ?? 'ETB');
-define('DEFAULT_PROPERTY_IMG', 'pexels-photo-106399.jpeg');
+define('DEFAULT_PROPERTY_IMG', 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&fm=jpg&q=60&w=1600');

@@ -121,7 +121,7 @@ include __DIR__ . '/../partials/header.php';
             name="title"
             class="field-input <?= e($fieldClass('title')) ?>"
             value="<?= e($formValues['title']) ?>"
-            placeholder="e.g. Modern Loft in Downtown Addis"
+            placeholder="e.g. Three-Bedroom Apartment in Bole"
             required
           />
           <?php if ($fieldError('title')): ?>
@@ -295,7 +295,7 @@ include __DIR__ . '/../partials/header.php';
       <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <h3 class="text-2xl font-semibold tracking-tight text-primary">Amenities & features</h3>
-          <p class="mt-2 text-sm leading-6 text-on-surface-variant">Select the amenities that should appear on the property detail page.</p>
+          <p class="mt-2 text-sm leading-6 text-on-surface-variant">Choose the features renters should see when they open this listing.</p>
         </div>
       </div>
 
@@ -312,14 +312,13 @@ include __DIR__ . '/../partials/header.php';
           />
           <div>
             <p class="text-sm font-medium text-primary"><?= e($amenity['name']) ?></p>
-            <p class="text-xs uppercase tracking-[0.18em] text-on-surface-variant"><?= e($amenity['icon'] ?? 'feature') ?></p>
           </div>
         </label>
         <?php endforeach; ?>
       </div>
       <?php else: ?>
       <div class="mt-6 rounded-[1.5rem] bg-surface-container-low px-5 py-5 text-sm leading-6 text-on-surface-variant">
-        Amenities can be added later. You can still publish this listing now.
+        Amenities are not available yet. You can still save the listing and add them later.
       </div>
       <?php endif; ?>
     </div>

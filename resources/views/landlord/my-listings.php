@@ -31,7 +31,7 @@ include __DIR__ . '/../partials/header.php';
     <div>
       <h2 class="text-3xl font-semibold tracking-tight text-primary">Your property portfolio</h2>
       <p class="mt-3 max-w-3xl text-base leading-7 text-on-surface-variant">
-        Review your listings, open the public page, update details, change availability, or remove a property when needed.
+        Keep your listings polished, update availability, and jump into edits whenever details change.
       </p>
     </div>
     <div class="flex flex-col gap-3 sm:flex-row">
@@ -92,7 +92,6 @@ include __DIR__ . '/../partials/header.php';
       </div>
 
       <div class="space-y-6 p-8">
-        <!-- Title & Price Header -->
         <div class="space-y-3">
           <h3 class="line-clamp-2 text-2xl font-bold tracking-tight text-primary leading-tight"><?= e($listing['title']) ?></h3>
           <p class="flex items-center gap-2 text-base text-on-surface-variant font-medium">
@@ -105,7 +104,22 @@ include __DIR__ . '/../partials/header.php';
           </div>
         </div>
 
-        <!-- Stats Grid -->
+        <?php if (!empty($listing['description'])): ?>
+        <p class="text-sm leading-6 text-on-surface-variant">
+          <?= e(strlen($listing['description']) > 180 ? substr($listing['description'], 0, 177) . '...' : $listing['description']) ?>
+        </p>
+        <?php endif; ?>
+
+        <?php if (!empty($listing['amenity_names'])): ?>
+        <div class="flex flex-wrap gap-2">
+          <?php foreach (array_slice($listing['amenity_names'], 0, 4) as $amenityName): ?>
+          <span class="rounded-full bg-surface-container-low px-3 py-1 text-xs font-medium text-on-surface-variant">
+            <?= e($amenityName) ?>
+          </span>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+
         <div class="grid grid-cols-3 gap-4 rounded-2xl bg-surface-container-low px-6 py-6">
           <div class="text-center">
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Views</p>
@@ -116,12 +130,11 @@ include __DIR__ . '/../partials/header.php';
             <p class="mt-3 text-2xl font-bold text-primary"><?= (int)$listing['bedrooms'] ?></p>
           </div>
           <div class="text-center">
-            <p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Baths</p>
-            <p class="mt-3 text-2xl font-bold text-primary"><?= (int)$listing['bathrooms'] ?></p>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-on-surface-variant/70">Area</p>
+            <p class="mt-3 text-2xl font-bold text-primary"><?= !empty($listing['area_sqm']) ? number_format((float)$listing['area_sqm']) : '--' ?></p>
           </div>
         </div>
 
-        <!-- Status Update Form -->
         <form action="<?= route('dashboard/listings/' . (int)$listing['id'] . '/status') ?>" method="POST" class="space-y-3">
           <?= csrfField() ?>
           <label class="block text-sm font-semibold text-on-surface-variant uppercase tracking-[0.15em]">Quick Status Update</label>
@@ -135,7 +148,6 @@ include __DIR__ . '/../partials/header.php';
           </div>
         </form>
 
-        <!-- Action Buttons -->
         <div class="grid gap-3 grid-cols-3 pt-4 border-t border-outline-variant/20">
           <a href="<?= route('property/' . (int)$listing['id']) ?>" class="btn-secondary justify-center text-sm font-semibold">
             <span class="material-symbols-outlined text-base">preview</span>

@@ -82,8 +82,7 @@ class HomeController extends BaseController
         $myProperties  = [];
 
         if ($user && $user['role'] === 'landlord') {
-            $userModel    = new User();
-            $myProperties = $userModel->getLandlordProperties($user['id']);
+            $myProperties = $propertyModel->getLandlordListings($user['id']);
         }
 
         $favorites = [];

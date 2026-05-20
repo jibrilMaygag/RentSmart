@@ -17,13 +17,14 @@ $propertyTypes = [
     'land' => 'Land',
 ];
 
+$heroImage = 'https://images.unsplash.com/photo-1774979517612-db480ae5b587?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1800';
 $cityImages = [
-    'Addis Ababa' => 'pexels-photo-358488.jpeg',
-    'Dire Dawa' => 'pexels-photo-3225529.jpeg',
-    'Bahir Dar' => 'pexels-photo-259962.jpeg',
-    'Hawassa' => 'pexels-photo-2166553.jpeg',
-    'Adama' => 'pexels-photo-323780.jpeg',
-    'Gondar' => 'pexels-photo-279746.jpeg',
+    'Addis Ababa' => 'https://images.unsplash.com/photo-1724001079027-800ed9a8ee4d?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
+    'Dire Dawa' => 'https://images.unsplash.com/photo-1771495604392-2008757fb32a?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
+    'Bahir Dar' => 'https://images.unsplash.com/photo-1771495562804-373fb516114c?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
+    'Hawassa' => 'https://images.unsplash.com/photo-1768638687896-35bde623d532?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
+    'Adama' => 'https://images.unsplash.com/photo-1774979517612-db480ae5b587?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
+    'Gondar' => 'https://images.unsplash.com/photo-1721395283507-1b17e527a922?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=60&w=1600',
 ];
 
 $featuredCities = array_slice(!empty($cities) ? $cities : array_keys($cityImages), 0, 4);
@@ -35,7 +36,7 @@ include __DIR__ . '/partials/header.php';
   <section class="relative isolate overflow-hidden">
     <div class="absolute inset-0">
       <img
-        src="<?= e(imageUrl('pexels-photo-358488.jpeg')) ?>"
+        src="<?= e(imageUrl($heroImage)) ?>"
         alt="Modern RentSmart property exterior"
         class="h-full w-full object-cover"
       />
@@ -224,7 +225,7 @@ include __DIR__ . '/partials/header.php';
 
       <div class="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         <?php foreach ($featuredCities as $city): ?>
-          <?php $cityImage = $cityImages[$city] ?? 'pexels-photo-323780_1.jpeg'; ?>
+          <?php $cityImage = $cityImages[$city] ?? $cityImages['Addis Ababa']; ?>
         <a href="<?= route('search', ['city' => $city]) ?>" class="group relative overflow-hidden rounded-[1.5rem] shadow-soft">
           <img
             src="<?= e(imageUrl($cityImage)) ?>"

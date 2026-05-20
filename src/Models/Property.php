@@ -16,7 +16,7 @@ class Property extends BaseModel
 
     public function getFeatured(int $limit = 8): array
     {
-        return $this->db->query(
+        $properties = $this->db->query(
             'SELECT p.*, pi.image_path AS image_path
              FROM properties p
              LEFT JOIN property_images pi ON pi.property_id = p.id AND pi.is_primary = 1
@@ -24,6 +24,8 @@ class Property extends BaseModel
              ORDER BY p.created_at DESC LIMIT ?',
             [$limit]
         )->fetchAll();
+
+        return $this->withAmenities($properties);
     }
 
     public function search(array $filters): array
@@ -77,7 +79,9 @@ class Property extends BaseModel
             $params[] = (int)$filters['limit'];
         }
 
-        return $this->db->query($query, $params)->fetchAll();
+        $properties = $this->db->query($query, $params)->fetchAll();
+
+        return $this->withAmenities($properties);
     }
 
     public function getCities(): array
@@ -139,7 +143,9 @@ class Property extends BaseModel
 
         $query .= ' ORDER BY p.created_at DESC';
 
-        return $this->db->query($query, $params)->fetchAll();
+        $properties = $this->db->query($query, $params)->fetchAll();
+
+        return $this->withAmenities($properties);
     }
 
     public function getLandlordListingCounts(int $landlordId): array
@@ -253,7 +259,7 @@ class Property extends BaseModel
 
     public function getUserFavorites(int $userId): array
     {
-        return $this->db->query(
+        $properties = $this->db->query(
             'SELECT p.*, pi.image_path AS image_path
              FROM properties p
              JOIN favorites f ON f.property_id = p.id
@@ -262,6 +268,8 @@ class Property extends BaseModel
              ORDER BY f.created_at DESC',
             [$userId]
         )->fetchAll();
+
+        return $this->withAmenities($properties);
     }
 
     public function getCityCount(string $city): int
@@ -419,5 +427,49 @@ class Property extends BaseModel
             );
             $order++;
         }
+    }
+
+    private function withAmenities(array $properties): array
+    {
+        if (empty($properties)) {
+            return $properties;
+        }
+
+        $propertyIds = array_values(array_filter(array_map(
+            static fn(array $property): int => (int)($property['id'] ?? 0),
+            $properties
+        )));
+
+        if (empty($propertyIds)) {
+            return $properties;
+        }
+
+        $placeholders = implode(', ', array_fill(0, count($propertyIds), '?'));
+        $rows = $this->db->query(
+            "SELECT pa.property_id, a.id, a.name
+             FROM property_amenities pa
+             JOIN amenities a ON a.id = pa.amenity_id
+             WHERE pa.property_id IN ({$placeholders})
+             ORDER BY a.name ASC",
+            $propertyIds
+        )->fetchAll();
+
+        $amenitiesByProperty = [];
+        foreach ($rows as $row) {
+            $propertyId = (int)$row['property_id'];
+            $amenitiesByProperty[$propertyId][] = [
+                'id' => (int)$row['id'],
+                'name' => $row['name'],
+            ];
+        }
+
+        foreach ($properties as &$property) {
+            $propertyAmenities = $amenitiesByProperty[(int)($property['id'] ?? 0)] ?? [];
+            $property['amenities'] = $propertyAmenities;
+            $property['amenity_names'] = array_column($propertyAmenities, 'name');
+        }
+        unset($property);
+
+        return $properties;
     }
 }

@@ -9,6 +9,11 @@ $badgeLabel = $badgeLabel ?? (!empty($property['is_featured']) ? 'Featured' : ''
 $priceSuffix = $listingType === 'rent' ? '/mo' : '';
 $removeOnUnfavorite = $removeOnUnfavorite ?? false;
 $showDetailsCta = $showDetailsCta ?? false;
+$description = trim((string)($property['description'] ?? ''));
+$descriptionPreview = $description === ''
+    ? ''
+    : (strlen($description) > 120 ? substr($description, 0, 117) . '...' : $description);
+$amenityPreview = array_slice($property['amenity_names'] ?? array_column($property['amenities'] ?? [], 'name'), 0, 3);
 ?>
 <article class="property-card group" data-property-card>
   <div class="property-card-image">
@@ -56,6 +61,22 @@ $showDetailsCta = $showDetailsCta ?? false;
         <?php endif; ?>
       </div>
     </div>
+
+    <?php if ($descriptionPreview !== ''): ?>
+    <p class="text-sm leading-6 text-on-surface-variant">
+      <?= e($descriptionPreview) ?>
+    </p>
+    <?php endif; ?>
+
+    <?php if (!empty($amenityPreview)): ?>
+    <div class="flex flex-wrap gap-2">
+      <?php foreach ($amenityPreview as $amenityName): ?>
+      <span class="rounded-full bg-surface-container-low px-3 py-1 text-xs font-medium text-on-surface-variant">
+        <?= e($amenityName) ?>
+      </span>
+      <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
 
     <div class="grid grid-cols-3 gap-3 border-t border-outline-variant/20 pt-4 text-sm text-on-surface-variant">
       <div class="flex items-center gap-2">
